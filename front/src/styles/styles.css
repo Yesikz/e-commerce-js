@@ -1,0 +1,29 @@
+/* ===== HEADER ===== */
+header {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ===== PRODUCT LIST ===== */
+section {
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  color:black
+}
+
+section h2 {
+  margin: 0;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
