@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { createProducts, getProducts, updateProduct, deleteProduct } from "../handlers/productsHandler.js";
 
 const productsRouter = Router();
 
@@ -6,23 +7,15 @@ const productsRouter = Router();
 
 //Get
 //Todos los productos
-productsRouter.get("/products", (req, res) => {
-  res.send("Lista de productos");
-});
+productsRouter.get("/products", getProducts);
 
 //Post
-productsRouter.post("/products", (req, res) => {
-  res.send("Creando un producto");
-});
+productsRouter.post("/products", createProducts);
 
 //Put
-productsRouter.put("/products/:id", (req, res) => {
-  res.send(`Actualizando el producto con id ${req.params.id}`);
-});
+productsRouter.put("/products/:id", updateProduct);
 
 //Delete
-productsRouter.delete("/products/:id", (req, res) => {
-  res.send(`Eliminando el producto con id ${req.params.id}`);
-});
+productsRouter.delete("/products/:id", deleteProduct);
 
 export default productsRouter;
