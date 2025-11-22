@@ -1,14 +1,16 @@
-const pedidoSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const pedidoSchema = new Schema(
   {
     usuario: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Usuario",
       required: true,
     },
 
     productos: [
       {
-        producto: { type: mongoose.Schema.Types.ObjectId, ref: "Producto" },
+        producto: { type: Schema.Types.ObjectId, ref: "Producto" },
         cantidad: { type: Number, required: true },
         precioUnitario: { type: Number, required: true },
       },
@@ -17,7 +19,7 @@ const pedidoSchema = new mongoose.Schema(
     total: { type: Number, required: true },
 
     metodoPago: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "MetodoPago",
       required: true,
     },
@@ -29,11 +31,11 @@ const pedidoSchema = new mongoose.Schema(
     },
 
     envio: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Envio",
     },
   },
   { timestamps: true, versionKey: false }
 );
 
-export default mongoose.model("Pedido", pedidoSchema);
+export default model("Pedido", pedidoSchema);

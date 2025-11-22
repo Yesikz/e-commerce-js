@@ -1,4 +1,6 @@
-const envioSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const envioSchema = new Schema(
   {
     direccion: {
       calle: String,
@@ -21,4 +23,4 @@ const envioSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("Envio", envioSchema);
+export default model("Envio", envioSchema);

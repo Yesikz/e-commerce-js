@@ -1,4 +1,6 @@
-const categoriaSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const categoriaSchema = new Schema(
   {
     nombre: {
       type: String,
@@ -12,4 +14,4 @@ const categoriaSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("Categoria", categoriaSchema);
+export default model("Categoria", categoriaSchema);

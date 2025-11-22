@@ -1,4 +1,6 @@
-const productoSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const productoSchema = new Schema(
   {
     nombre: {
       type: String,
@@ -21,13 +23,13 @@ const productoSchema = new mongoose.Schema(
     },
 
     categoria: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Categoria",
       required: true,
     },
 
     marca: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Marca",
       required: true,
     },
@@ -39,4 +41,4 @@ const productoSchema = new mongoose.Schema(
   { versionKey: false, timestamps: true }
 );
 
-export default mongoose.model("Producto", productoSchema);
+export default model("Producto", productoSchema);

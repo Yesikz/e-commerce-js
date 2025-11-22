@@ -1,4 +1,6 @@
-const metodoPagoSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const metodoPagoSchema = new Schema(
   {
     nombre: {
       type: String,
@@ -9,4 +11,4 @@ const metodoPagoSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("MetodoPago", metodoPagoSchema);
+export default model("MetodoPago", metodoPagoSchema);

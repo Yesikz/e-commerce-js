@@ -1,4 +1,6 @@
-const marcaSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const marcaSchema = new Schema(
   {
     nombre: { type: String, required: true, unique: true },
     paisOrigen: { type: String },
@@ -6,4 +8,4 @@ const marcaSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("Marca", marcaSchema);
+export default model("Marca", marcaSchema);

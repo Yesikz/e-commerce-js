@@ -1,4 +1,6 @@
-const carritoSchema = new mongoose.Schema(
+import { Schema, model } from "mongoose";
+
+const carritoSchema = new Schema(
   {
     usuario: {
       type: mongoose.Schema.Types.ObjectId,
@@ -22,4 +24,4 @@ const carritoSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-export default mongoose.model("Carrito", carritoSchema);
+export default model("Carrito", carritoSchema);
