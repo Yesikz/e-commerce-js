@@ -146,6 +146,6 @@ La API sigue una separación clara por capas:
 
 ## 📚 Autor
 
-Desarrollado por **Leandro Alegre**  
+Desarrollado
 📘 En curso: Introducción a JavaScript  
 🚀 Proyecto práctica profesional
