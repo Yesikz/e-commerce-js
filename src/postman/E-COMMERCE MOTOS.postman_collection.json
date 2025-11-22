@@ -7,362 +7,507 @@
 	},
 	"item": [
 		{
-			"name": "Create",
+			"name": "User",
 			"item": [
 				{
-					"name": "UserCreate",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombre\": \"Leandro\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@mail.com\",\n  \"contraseña\": \"123456\",\n  \"telefono\": \"1234567890\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Avenida Falsa\",\n      \"numero\": \"1234\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Create",
+					"item": [
+						{
+							"name": "UserCreate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Leandro\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@mail.com\",\n  \"contraseña\": \"123456\",\n  \"telefono\": \"1234567890\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Avenida Falsa\",\n      \"numero\": \"1234\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
-							]
+						{
+							"name": "UserCreate2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Mariano\",\n  \"nombreUsuario\": \"marianodev87\",\n  \"email\": \"mariano.dev87@example.com\",\n  \"contraseña\": \"Gf9!kL23zP\",\n  \"telefono\": \"1145673322\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Calle del Sol\",\n      \"numero\": \"742\",\n      \"ciudad\": \"Córdoba\",\n      \"provincia\": \"Córdoba\",\n      \"codigoPostal\": \"5000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "UserCreate Copy",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombre\": \"Mariano\",\n  \"nombreUsuario\": \"marianodev87\",\n  \"email\": \"mariano.dev87@example.com\",\n  \"contraseña\": \"Gf9!kL23zP\",\n  \"telefono\": \"1145673322\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Calle del Sol\",\n      \"numero\": \"742\",\n      \"ciudad\": \"Córdoba\",\n      \"provincia\": \"Córdoba\",\n      \"codigoPostal\": \"5000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "GetAllUsers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
-							]
+						{
+							"name": "GetAllUsersState",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/stats",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"stats"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users?id=6921925aabc2b3c79e7a7599",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "6921925aabc2b3c79e7a7599"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByEmailUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/email?email=messi@gmail.com",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"email"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "leandro@mail.com",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "messi@gmail.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByNameUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/name?nombre=messi",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"name"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "Leandro",
+											"disabled": true
+										},
+										{
+											"key": "nombre",
+											"value": "messi"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByRolUseer",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/rol?rol=admin",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"rol"
+									],
+									"query": [
+										{
+											"key": "rol",
+											"value": "cliente",
+											"disabled": true
+										},
+										{
+											"key": "rol",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByStatusUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/status?activo=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"status"
+									],
+									"query": [
+										{
+											"key": "activo",
+											"value": "false",
+											"disabled": true
+										},
+										{
+											"key": "activo",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Update",
+					"item": [
+						{
+							"name": "UpdateUser",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Leandro Actualizado\",\n  \"telefono\": \"123456789\",\n  \"activo\": true,\n  \"rol\": \"cliente\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"6921925aabc2b3c79e7a7599"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateStatusUser",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"activo\": false\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599/status",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"6921925aabc2b3c79e7a7599",
+										"status"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "DeleteSoftUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/soft/6921925aabc2b3c79e7a7599",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"soft",
+										"6921925aabc2b3c79e7a7599"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/6921ba386b35e2cddadb2b8e",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"6921ba386b35e2cddadb2b8e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "GetAll",
-			"item": [
-				{
-					"name": "GetAllUsers",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllUsersState",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/stats",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"stats"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetByIdUser",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users?id=6921925aabc2b3c79e7a7599",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "6921925aabc2b3c79e7a7599"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetByEmailUser",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/email?email=messi@gmail.com",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"email"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "leandro@mail.com",
-									"disabled": true
-								},
-								{
-									"key": "email",
-									"value": "messi@gmail.com"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetByNameUser",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/name?nombre=messi",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"name"
-							],
-							"query": [
-								{
-									"key": "nombre",
-									"value": "Leandro",
-									"disabled": true
-								},
-								{
-									"key": "nombre",
-									"value": "messi"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetByRolUseer",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/rol?rol=admin",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"rol"
-							],
-							"query": [
-								{
-									"key": "rol",
-									"value": "cliente",
-									"disabled": true
-								},
-								{
-									"key": "rol",
-									"value": "admin"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GetByStatusUser",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/status?activo=true",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"status"
-							],
-							"query": [
-								{
-									"key": "activo",
-									"value": "false",
-									"disabled": true
-								},
-								{
-									"key": "activo",
-									"value": "true"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"name": "Products",
+			"item": []
 		},
 		{
-			"name": "Update",
+			"name": "Category",
 			"item": [
 				{
-					"name": "UpdateUser",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"nombre\": \"Leandro Actualizado\",\n  \"telefono\": \"123456789\",\n  \"activo\": true,\n  \"rol\": \"cliente\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Create",
+					"item": [
+						{
+							"name": "CategoriaCreate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Deportivas\",\n  \"descripcion\": \"Motos diseñadas para velocidad y rendimiento\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"6921925aabc2b3c79e7a7599"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "UpdateStatusUser",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"activo\": false\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "GetAllCategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599/status",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"6921925aabc2b3c79e7a7599",
-								"status"
-							]
+						{
+							"name": "GetByIdCategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/6921f9ea8fb86cdfe3051466",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"6921f9ea8fb86cdfe3051466"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Delete",
-			"item": [
+					]
+				},
 				{
-					"name": "DeleteSoftUser",
+					"name": "Update",
+					"item": [
+						{
+							"name": "UpdateCategory",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Deportivas Actualizada\",\n  \"descripcion\": \"Actualización de descripción\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/categories/6921f9ea8fb86cdfe3051466",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"6921f9ea8fb86cdfe3051466"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DeleteCategory",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/soft/6921925aabc2b3c79e7a7599",
+							"raw": "http://localhost:3000/categories/6921fc22df41aa65367d8e7e",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"users",
-								"soft",
-								"6921925aabc2b3c79e7a7599"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteUser",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/users/6921ba386b35e2cddadb2b8e",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"users",
-								"6921ba386b35e2cddadb2b8e"
+								"categories",
+								"6921fc22df41aa65367d8e7e"
 							]
 						}
 					},
