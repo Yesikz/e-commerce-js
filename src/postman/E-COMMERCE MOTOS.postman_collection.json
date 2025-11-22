@@ -36,6 +36,337 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "UserCreate Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Mariano\",\n  \"nombreUsuario\": \"marianodev87\",\n  \"email\": \"mariano.dev87@example.com\",\n  \"contraseña\": \"Gf9!kL23zP\",\n  \"telefono\": \"1145673322\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Calle del Sol\",\n      \"numero\": \"742\",\n      \"ciudad\": \"Córdoba\",\n      \"provincia\": \"Córdoba\",\n      \"codigoPostal\": \"5000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GetAll",
+			"item": [
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsersState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByIdUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users?id=6921925aabc2b3c79e7a7599",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6921925aabc2b3c79e7a7599"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByEmailUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/email?email=messi@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "leandro@mail.com",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "messi@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByNameUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/name?nombre=messi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"name"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Leandro",
+									"disabled": true
+								},
+								{
+									"key": "nombre",
+									"value": "messi"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByRolUseer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/rol?rol=admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"rol"
+							],
+							"query": [
+								{
+									"key": "rol",
+									"value": "cliente",
+									"disabled": true
+								},
+								{
+									"key": "rol",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByStatusUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/status?activo=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"status"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "false",
+									"disabled": true
+								},
+								{
+									"key": "activo",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"item": [
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Leandro Actualizado\",\n  \"telefono\": \"123456789\",\n  \"activo\": true,\n  \"rol\": \"cliente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"6921925aabc2b3c79e7a7599"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStatusUser",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"activo\": false\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"6921925aabc2b3c79e7a7599",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "DeleteSoftUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/soft/6921925aabc2b3c79e7a7599",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"soft",
+								"6921925aabc2b3c79e7a7599"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/6921ba386b35e2cddadb2b8e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"6921ba386b35e2cddadb2b8e"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
