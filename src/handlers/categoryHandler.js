@@ -1,14 +1,22 @@
 import {
   createCategoriaController,
+  /* Get */
   getAllCategoriesController,
+  getCategoryStatsController,
   getCategoryByNameController,
   getCategoryByIdController,
+  getCategoryByStatusController,
+  /* Update */
   updateCategoryController,
+  restoreCategoryController,
+  /* Delete */
+  deleteSoftCategoryController,
   deleteCategoryController,
 } from "../controllers/categoryControllers.js";
 
 import { validateCategoria } from "../validations/categoriaValidation.js";
 
+/* --- Create --- */
 export const createCategoriaHandler = async (req, res, next) => {
   try {
     // Validación con Joi
@@ -22,24 +30,47 @@ export const createCategoriaHandler = async (req, res, next) => {
 
     const { nombre, descripcion } = req.body;
 
-    // Delegación al controller (solo lógica DB)
+    // Lógica de creación
     const response = await createCategoriaController({
       nombre,
       descripcion,
     });
 
-    return res.status(201).json(response);
+    return res.status(201).json({
+      success: true,
+      message: response.message,
+      data: response.category,
+    });
   } catch (error) {
-    next(error);
+    return res.status(error.status || 500).json({
+      success: false,
+      message: error.message || "Error interno del servidor",
+    });
   }
 };
 
+/* --- Read --- */
 export const getAllCategoriesHandler = async (req, res, next) => {
   try {
     const response = await getAllCategoriesController();
     return res.status(200).json(response);
   } catch (err) {
-    next(err);
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
+  }
+};
+
+export const getAllCategoryStatsHandler = async (req, res, next) => {
+  try {
+    const response = await getCategoryStatsController();
+    return res.status(200).json(response);
+  } catch (err) {
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
 
@@ -54,9 +85,13 @@ export const getCategoryByNameHandler = async (req, res, next) => {
     }
 
     const response = await getCategoryByNameController(nombre);
+
     return res.status(200).json(response);
   } catch (err) {
-    next(err);
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
 
@@ -64,12 +99,32 @@ export const getCategoryByIdHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const response = await getCategoryByIdController(id);
+
     return res.status(200).json(response);
   } catch (err) {
-    next(err);
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
 
+/* --- Estado --- */
+export const getCategoryByStatusHandler = async (req, res, next) => {
+  try {
+    const { isActive } = req.query;
+    const response = await getCategoryByStatusController(isActive);
+
+    return res.status(200).json(response);
+  } catch (err) {
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
+  }
+};
+
+/* --- Update --- */
 export const updateCategoryHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -82,7 +137,39 @@ export const updateCategoryHandler = async (req, res, next) => {
 
     return res.status(200).json(response);
   } catch (err) {
-    next(err);
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
+  }
+};
+
+export const restoreCategoryHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await restoreCategoryController(id);
+
+    return res.status(200).json(response);
+  } catch (err) {
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
+  }
+};
+
+/* --- Delete --- */
+export const deleteSoftCategoryHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await deleteSoftCategoryController(id);
+
+    return res.status(200).json(response);
+  } catch (err) {
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
 
@@ -93,6 +180,9 @@ export const deleteCategoryHandler = async (req, res, next) => {
 
     return res.status(200).json(response);
   } catch (err) {
-    next(err);
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
