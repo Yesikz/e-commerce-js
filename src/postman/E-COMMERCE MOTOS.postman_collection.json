@@ -412,6 +412,62 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "CategoriaCreate2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Trail\",\n  \"descripcion\": \"Motos diseñadas para todo tipo de terreno y aventura\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CategoriaCreate3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"Scooter\",\n  \"descripcion\": \"Motos urbanas, cómodas y económicas para ciudad\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -438,12 +494,12 @@
 							"response": []
 						},
 						{
-							"name": "GetByIdCategories",
+							"name": "GetByNameCategory",
 							"request": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/categories/6921f9ea8fb86cdfe3051466",
+									"raw": "http://localhost:3000/categories/name?nombre=Deportivas",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -451,7 +507,59 @@
 									"port": "3000",
 									"path": [
 										"categories",
-										"6921f9ea8fb86cdfe3051466"
+										"name"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "Deportivas"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdCategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/69222a7cb0033b8efc99170b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"69222a7cb0033b8efc99170b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByStatusCategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/status?isActive=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"status"
+									],
+									"query": [
+										{
+											"key": "isActive",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -477,7 +585,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/categories/6921f9ea8fb86cdfe3051466",
+									"raw": "http://localhost:3000/categories/69222a7cb0033b8efc99170b",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -485,7 +593,28 @@
 									"port": "3000",
 									"path": [
 										"categories",
-										"6921f9ea8fb86cdfe3051466"
+										"69222a7cb0033b8efc99170b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RestoreCategory",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/restore/69222a7cb0033b8efc99170b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"restore",
+										"69222a7cb0033b8efc99170b"
 									]
 								}
 							},
@@ -494,24 +623,50 @@
 					]
 				},
 				{
-					"name": "DeleteCategory",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/categories/6921fc22df41aa65367d8e7e",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"categories",
-								"6921fc22df41aa65367d8e7e"
-							]
+					"name": "Delete",
+					"item": [
+						{
+							"name": "DeleteCategory",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/69222a7cb0033b8efc99170b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"69222a7cb0033b8efc99170b"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteSoftCategory",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/soft/69222a7cb0033b8efc99170b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"soft",
+										"69222a7cb0033b8efc99170b"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
