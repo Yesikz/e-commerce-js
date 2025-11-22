@@ -1,3 +1,21 @@
+/* 
+FALTAN AGREGAR
+ getCategoryStatsController,
+ getCategoryWithProductsController,
+
+ Listos para el front
+ - createCategoriaController
+ - getAllCategoriesController
+ - getCategoryStatsController 
+ - getCategoryByNameController
+ - getCategoryByIdController
+ - getCategoryByStatusController
+ - updateCategoryController
+ - restoreCategoryController
+ - deleteSoftCategoryController
+ - 
+*/
+
 import Categoria from "../models/Categoria.js";
 
 /* =======================================================
@@ -8,9 +26,9 @@ import Categoria from "../models/Categoria.js";
  * Devuelve mensaje de confirmación y los datos creados.
  */
 export const createCategoriaController = async (categoriaData) => {
-  const { nombre, descripcion } = categoriaData;
+  const { nombre, descripcion, activo = true } = categoriaData;
 
-  // Buscar si ya existe una categoría con ese nombre
+  // Validación: duplicados
   const categoryExist = await Categoria.findOne({ nombre });
   if (categoryExist) {
     const err = new Error("Categoría ya registrada");
@@ -22,6 +40,7 @@ export const createCategoriaController = async (categoriaData) => {
   const newCategory = await Categoria.create({
     nombre,
     descripcion,
+    activo,
   });
 
   return {
@@ -52,8 +71,27 @@ export const getAllCategoriesController = async () => {
   }
 
   return {
+    success: true,
     message: "Categorías encontradas",
-    categories,
+    data: categories,
+  };
+};
+
+export const getCategoryStatsController = async () => {
+  const total = await Categoria.countDocuments();
+  const active = await Categoria.countDocuments({ activo: true });
+  const inactive = await Categoria.countDocuments({ activo: false });
+
+  if (total === 0) {
+    const err = new Error("No hay categorías registradas");
+    err.status = 404;
+    throw err;
+  }
+
+  return {
+    success: true,
+    message: "Estadísticas de categorías obtenidas correctamente",
+    data: { total, active, inactive },
   };
 };
 
@@ -69,8 +107,9 @@ export const getCategoryByNameController = async (nombre) => {
   }
 
   return {
+    success: true,
     message: "Categoría encontrada",
-    categories: categoriesByName,
+    data: categoriesByName,
   };
 };
 
@@ -84,8 +123,34 @@ export const getCategoryByIdController = async (id) => {
   }
 
   return {
+    success: true,
     message: "Categoría encontrada",
-    category: categoryById,
+    data: categoryById,
+  };
+};
+
+export const getCategoryByStatusController = async (isActive) => {
+  // Validación y conversión a boolean
+  if (typeof isActive === "string") {
+    if (isActive !== "true" && isActive !== "false") {
+      const err = new Error(
+        "El parámetro 'isActive' debe ser 'true' o 'false'"
+      );
+      err.status = 400;
+      throw err;
+    }
+    isActive = isActive === "true";
+  }
+
+  // Filtrado
+  const categories = await Categoria.find({ activo: isActive });
+
+  return {
+    success: true,
+    message: categories.length
+      ? `Categorías ${isActive ? "activas" : "inactivas"} encontradas`
+      : `No se encontraron categorías ${isActive ? "activas" : "inactivas"}`,
+    data: categories,
   };
 };
 
@@ -98,7 +163,7 @@ export const getCategoryByIdController = async (id) => {
  */
 
 export const updateCategoryController = async (id, categoryData) => {
-  const { nombre, descripcion } = categoryData;
+  const { nombre, descripcion, activo } = categoryData;
 
   // Validación: existencia por id
   const categoryById = await Categoria.findById(id);
@@ -108,16 +173,44 @@ export const updateCategoryController = async (id, categoryData) => {
     throw err;
   }
 
-  // Actualización en la DB y obtener el documento actualizado
+  // Actualización en la DB
   const categoryUpdate = await Categoria.findByIdAndUpdate(
     id,
-    { nombre, descripcion },
-    { new: true, runValidators: true } // runValidators asegura que Joi/Mongoose schema se cumpla
+    { nombre, descripcion, activo },
+    { new: true, runValidators: true }
   );
 
   return {
+    success: true,
     message: "Categoría actualizada",
-    category: categoryUpdate,
+    data: categoryUpdate,
+  };
+};
+
+export const restoreCategoryController = async (id) => {
+  // Buscar categoría por ID
+  const category = await Categoria.findById(id);
+  if (!category) {
+    const err = new Error("Categoría no encontrada");
+    err.status = 404;
+    throw err;
+  }
+
+  // Verificar si ya está activa
+  if (category.activo) {
+    const err = new Error("La categoría ya está activa");
+    err.status = 400;
+    throw err;
+  }
+
+  // Restaurar categoría
+  category.activo = true;
+  await category.save();
+
+  return {
+    success: true,
+    message: "Categoría restaurada exitosamente",
+    data: category,
   };
 };
 
@@ -129,6 +222,32 @@ export const updateCategoryController = async (id, categoryData) => {
  * - Eliminacion permanente la categoría de la DB.
  * - Devuelve un mensaje de éxito junto con los datos de la categoría eliminada.
  */
+export const deleteSoftCategoryController = async (id) => {
+  // Buscar categoría por ID
+  const category = await Categoria.findById(id);
+  if (!category) {
+    const err = new Error(`Categoría con ID '${id}' no encontrada`);
+    err.status = 404;
+    throw err;
+  }
+
+  // Verificar si ya está inactiva
+  if (!category.activo) {
+    const err = new Error(`La categoría con ID '${id}' ya está inactiva`);
+    err.status = 400;
+    throw err;
+  }
+
+  // Soft delete
+  category.activo = false;
+  await category.save();
+
+  return {
+    success: true,
+    message: `Categoría con ID '${id}' desactivada (soft delete)`,
+    data: category,
+  };
+};
 
 export const deleteCategoryController = async (id) => {
   // Buscar categoría por ID
@@ -144,7 +263,8 @@ export const deleteCategoryController = async (id) => {
   await Categoria.findByIdAndDelete(id);
 
   return {
+    success: true,
     message: "Categoría eliminada",
-    category: categoryDelete,
+    data: categoryDelete,
   };
 };
