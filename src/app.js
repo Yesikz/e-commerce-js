@@ -2,7 +2,6 @@ import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import mainRouter from "./routes/mainRoute.js";
-import productsRouter from "./routes/productsRoutes.js";
 import setupLogger from "./config/logger.js";
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -21,9 +20,5 @@ setupLogger(app);
 
 //Ruta raiz
 app.use("/", mainRouter);
-
-
-//Rutas de productos
-app.use("/api", productsRouter);
 
 export default app;
