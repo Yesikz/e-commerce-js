@@ -12,13 +12,13 @@ dotenv.config({ quiet: true });
 app.use(morgan("dev"));
 app.use(express.json());
 
-// Middleware global de manejo de errores
-app.use(errorHandler);
-
 // Logging de solicitudes
 setupLogger(app);
 
 //Ruta raiz
 app.use("/", mainRouter);
+
+// Middleware global de manejo de errores
+app.use(errorHandler);
 
 export default app;
