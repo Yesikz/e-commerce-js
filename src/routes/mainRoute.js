@@ -1,10 +1,17 @@
 import { Router } from "express";
+import userRoutes from "./userRoutes.js";
+import productRoutes from "./productsRoutes.js";
+import categoryRoutes from "./categoryRoutes.js";
 
-const mainRouter = Router();
+const mainRoute = Router();
 
-// Ruta raíz
-mainRouter.get("/", (req, res) => {
-  res.send("Welcome to my Api with Express!!! 👽");
-});
+// Users
+mainRoute.use("/users", userRoutes);
 
-export default mainRouter;
+// Products
+mainRoute.use("/products", productRoutes);
+
+// Categoria
+mainRoute.use("/categories", categoryRoutes);
+
+export default mainRoute;
