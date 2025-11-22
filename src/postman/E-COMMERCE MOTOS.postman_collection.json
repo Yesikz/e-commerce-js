@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "58d92d2b-871f-4ab0-a098-df93467cee1c",
+		"name": "E-COMMERCE MOTOS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48621884"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"item": [
+				{
+					"name": "UserCreate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Leandro\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@mail.com\",\n  \"contraseña\": \"123456\",\n  \"telefono\": \"1234567890\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Avenida Falsa\",\n      \"numero\": \"1234\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
