@@ -16,7 +16,7 @@ export const registerHandler = async (req, res, next) => {
     // Si hay error de validación, lo tiro para que el middleware global lo maneje
     if (error) {
       const err = new Error(error.details[0].message);
-      err.status = 409; // conflicto de datos
+      err.status = 409;
       err.name = "ValidationError";
       throw err;
     }
@@ -24,14 +24,14 @@ export const registerHandler = async (req, res, next) => {
     // Llamo al controller para crear el usuario
     const usuario = await registerController(value);
 
-    // Devuelvo la respuesta con status 201 y el usuario creado (sin contraseña)
+    // Devuelvo el usuario creado (sin contraseña)
     return res.status(201).json({
       success: true,
       message: "Usuario registrado exitosamente",
       data: usuario,
     });
   } catch (err) {
-    // Si ocurre cualquier error, lo paso al middleware global
+    // cualquier error al middleware global
     next(err);
   }
 };
