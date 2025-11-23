@@ -2,12 +2,14 @@ import { validateUsuario } from "../validations/usuariosValidation.js";
 import { validateProducto } from "../validations/productosValidation.js";
 import { validateCategoria } from "../validations/categoriaValidation.js";
 import { validateCarrito } from "../validations/carritoValidation.js";
+import { validateLogin } from "../validations/authValidation.js";
 
 const schemas = {
   usuario: validateUsuario,
   producto: validateProducto,
   categoria: validateCategoria,
   carrito: validateCarrito,
+  login: validateLogin,
 };
 
 export const validate = (model, data) => {
