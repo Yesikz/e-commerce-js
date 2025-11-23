@@ -7,7 +7,15 @@ import { generarToken } from "../utils/authToken.js";
 ===============================*/
 export const registerController = async (usuarioData) => {
   // Extraigo los campos importantes
-  const { email, nombreUsuario, contraseña } = usuarioData;
+  const {
+    nombre,
+    nombreUsuario,
+    email,
+    telefono,
+    dni,
+    fechaNacimiento,
+    contraseña,
+  } = usuarioData;
 
   // Primero chequeo si ya existe un usuario con ese email o nombre de usuario
   const existingUser = await Usuario.findOne({
