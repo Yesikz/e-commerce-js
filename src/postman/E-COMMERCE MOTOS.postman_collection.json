@@ -7,6 +7,69 @@
 	},
 	"item": [
 		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "AuthRegister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Leandro Alegre\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@example.com\",\n  \"contraseña\": \"MiContraseñaSegura\",\n  \"telefono\": \"123456789\",\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Calle Falsa\",\n      \"numero\": \"123\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"leandro@example.com\",\n  \"contraseña\": \"MiContraseñaSegura\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "User",
 			"item": [
 				{
@@ -281,7 +344,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/users/6921925aabc2b3c79e7a7599",
+									"raw": "http://localhost:3000/users/69226661640dcba714311b8f",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -289,7 +352,7 @@
 									"port": "3000",
 									"path": [
 										"users",
-										"6921925aabc2b3c79e7a7599"
+										"69226661640dcba714311b8f"
 									]
 								}
 							},
@@ -336,7 +399,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/users/soft/6921925aabc2b3c79e7a7599",
+									"raw": "http://localhost:3000/users/soft/69226661640dcba714311b8f",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -345,7 +408,7 @@
 									"path": [
 										"users",
 										"soft",
-										"6921925aabc2b3c79e7a7599"
+										"69226661640dcba714311b8f"
 									]
 								}
 							},
@@ -357,7 +420,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/users/6921ba386b35e2cddadb2b8e",
+									"raw": "http://localhost:3000/users/69226661640dcba714311b8f",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -365,7 +428,7 @@
 									"port": "3000",
 									"path": [
 										"users",
-										"6921ba386b35e2cddadb2b8e"
+										"69226661640dcba714311b8f"
 									]
 								}
 							},
@@ -494,6 +557,26 @@
 							"response": []
 						},
 						{
+							"name": "GetStatsCategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/categories/stats",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"categories",
+										"stats"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "GetByNameCategory",
 							"request": {
 								"method": "GET",
@@ -585,7 +668,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/categories/69222a7cb0033b8efc99170b",
+									"raw": "http://localhost:3000/categories/69226e0969737469068fd824",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -593,7 +676,7 @@
 									"port": "3000",
 									"path": [
 										"categories",
-										"69222a7cb0033b8efc99170b"
+										"69226e0969737469068fd824"
 									]
 								}
 							},
@@ -605,7 +688,7 @@
 								"method": "PATCH",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/categories/restore/69222a7cb0033b8efc99170b",
+									"raw": "http://localhost:3000/categories/restore/69226e0969737469068fd824",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -614,7 +697,7 @@
 									"path": [
 										"categories",
 										"restore",
-										"69222a7cb0033b8efc99170b"
+										"69226e0969737469068fd824"
 									]
 								}
 							},
@@ -631,7 +714,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/categories/69222a7cb0033b8efc99170b",
+									"raw": "http://localhost:3000/categories/69226e0969737469068fd824",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -639,7 +722,7 @@
 									"port": "3000",
 									"path": [
 										"categories",
-										"69222a7cb0033b8efc99170b"
+										"69226e0969737469068fd824"
 									]
 								}
 							},
@@ -651,7 +734,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/categories/soft/69222a7cb0033b8efc99170b",
+									"raw": "http://localhost:3000/categories/soft/69226e0969737469068fd824",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -660,7 +743,7 @@
 									"path": [
 										"categories",
 										"soft",
-										"69222a7cb0033b8efc99170b"
+										"69226e0969737469068fd824"
 									]
 								}
 							},
