@@ -49,6 +49,25 @@ export const validateUsuario = Joi.object({
         "El teléfono solo puede contener números y caracteres válidos (+, -, (), espacios).",
     }),
 
+  // Nuevo: DNI
+  dni: Joi.string()
+    .trim()
+    .pattern(/^[0-9]{7,10}$/)
+    .required()
+    .messages({
+      "string.base": "El DNI debe ser un texto.",
+      "string.empty": "El DNI es obligatorio.",
+      "string.pattern.base": "El DNI debe contener entre 7 y 10 números.",
+      "any.required": "El DNI es obligatorio.",
+    }),
+
+  // Nuevo: Fecha de nacimiento
+  fechaNacimiento: Joi.date().less("now").required().messages({
+    "date.base": "La fecha de nacimiento debe ser una fecha válida.",
+    "date.less": "La fecha de nacimiento no puede ser en el futuro.",
+    "any.required": "La fecha de nacimiento es obligatoria.",
+  }),
+
   activo: Joi.boolean().optional().messages({
     "boolean.base": "El campo 'activo' debe ser verdadero o falso.",
   }),
