@@ -10,6 +10,10 @@ const categoriaSchema = new Schema(
     descripcion: {
       type: String,
     },
+    activo: {
+      type: Boolean,
+      default: true,
+    },
   },
   { versionKey: false }
 );

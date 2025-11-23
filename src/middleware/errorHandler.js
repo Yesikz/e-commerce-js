@@ -1,27 +1,36 @@
 const errorHandler = (err, req, res, next) => {
-
-  console.error('Error detectado', err.message);
+  // Log en consola para desarrollo
+  console.error(`[ERROR] ${err.name}: ${err.message}`);
 
   let statusCode = err.status || 500;
-  let message = err.message || 'Error interno del servidor';
+  let message = err.message || "Error interno del servidor";
 
-  if (err.name === 'ValidationError') {
-    statusCode = 400;
-  } else if (err.name === 'MongoDatabaseError') {
-    statusCode = 500;
-  } else if (err.name === 'UnauthorizedError') {
-    statusCode = 401;
-  };
+  // Ajustes por tipo de error
+  switch (err.name) {
+    case "ValidationError": // Mongoose o Joi
+    case "JoiError":
+      statusCode = 400;
+      break;
+    case "MongoDatabaseError":
+      statusCode = 500;
+      break;
+    case "UnauthorizedError":
+      statusCode = 401;
+      break;
+    case "CastError": // Mongoose ObjectId inválido
+      statusCode = 400;
+      message = "ID inválido";
+      break;
+    default:
+      break;
+  }
 
   res.status(statusCode).json({
     success: false,
-    error: {
-      message,
-      type: err.name || 'ServerError',
-      status: statusCode,
-    },
+    message,
+    status: statusCode,
+    type: err.name || "ServerError",
   });
-
 };
 
 export default errorHandler;

@@ -1,9 +1,44 @@
-# 🏍️ E-commerce API
+<div align="center">
+  
+# 🏍️ E-commerce API  
+### API RESTful construida con Node.js, Express y MongoDB para un sistema de comercio electrónico modular, seguro y escalable.
 
-Este proyecto es una API RESTful desarrollada con **Node.js**, **Express**, y **MongoDB**, pensada para un sistema de **e-commerce** modular y escalable.
-La estructura sigue buenas prácticas de arquitectura limpia, separando controladores, manejadores, validaciones, middlewares y modelos de base de datos.
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
+![Express](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white&style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?logo=mongodb&logoColor=white&style=for-the-badge)
+![JWT](https://img.shields.io/badge/JWT-black?logo=jsonwebtokens&style=for-the-badge)
+![Joi](https://img.shields.io/badge/Joi-FFDD00?style=for-the-badge)
+
+</div>
 
 ---
+
+# 📌 Descripción General
+
+Este proyecto es una **API RESTful** para un sistema de **e-commerce**, desarrollada con:
+
+- **Node.js**
+- **Express**
+- **MongoDB + Mongoose**
+- **JWT** para autenticación segura
+- **Joi** para validación de datos
+- **Morgan** para auditoría y logs
+
+Diseñada con arquitectura modular y buenas prácticas para permitir escalabilidad y fácil mantenimiento.
+
+---
+
+🧩 Arquitectura de la API
+
+Cliente → Rutas → Handlers → Controllers → Models → MongoDB
+
+### Descripción de capas
+
+- **Routes:** Definen los endpoints de la API.
+- **Handlers:** Preparan los datos recibidos y llaman a los controllers correspondientes.
+- **Controllers:** Contienen la lógica de negocio principal.
+- **Models:** Interactúan con la base de datos MongoDB a través de Mongoose.
+- **Middlewares:** Se encargan de la autenticación, validación de datos y manejo de errores.
 
 ## 🧩 Estructura del Proyecto
 
@@ -13,11 +48,17 @@ src/
 │   └── logger.js               # Configuración y manejo de logs personalizados
 │
 ├── controllers/                # Controladores: manejan la lógica de negocio
+│   ├── categoryController.js
+│   ├── productsController.js
+│   ├── usuarioController.js
 │
 ├── db/                         # Conexión y configuración de la base de datos
 │   └── database.js
 │
 ├── handlers/                   # Handlers: reciben las solicitudes HTTP y llaman a los controladores
+│   ├── categoryHandler.js
+│   ├── productsHandler.js
+│   ├── usuarioHandler.js
 │
 ├── logs/                       # Registro de logs de acceso y errores con morgan
 │   └── access.log
@@ -25,25 +66,42 @@ src/
 ├── middleware/                 # Middlewares de Express para validación, autorización y manejo de errores
 │   ├── errorHandler.js
 │
-├── models/                     # Modelos de base de datos (definidos con Sequelize)
+├── models/                     # Modelos de base de datos
+│   ├── Carrito.js
+│   ├── Categorias.js
+│   ├── Envios.js
+│   ├── Marcas.js
+│   ├── MetodoPago.js
+│   ├── Pedidos.js
+│   ├── Productos.js
+│   ├── Usuarios.js
 │   └── relations/              # Relaciones entre modelos
 │
 │
 ├── postman/                    # Importación de postman.json
-│   └── Api prueba.postman_collection.json
+│   └── E-COMMERCE MOTOS.postman_collection.json
 │
 │
 ├── Routes/                     # Definición y organización de rutas del servidor
+│   ├── categoryRoutes.js
 │   ├── mainRoute.js
+│   ├── productsRoute.js
+│   ├── userRoutes.js
 │
 ├── validations/                # Validaciones de datos mediante Joi
-│
-├── validators/
+│   ├── carritoValidation.js
+│   ├── categoriaValidation.js
+│   ├── enviosValidation.js
+│   ├── marcasValidation.js
+│   ├── metodoPagoValidation.js
+│   ├── pedidosValidation.js
+│   ├── productosValidation.js
+│   ├── usuariosValidation.js
 │   └── validators.js           # Función centralizada para validar datos de entrada según el modelo correspondiente.
 │
 ├── app.js                      # Configuración principal de la aplicación Express
 ├── .gitignore
-├── index.js                    # Punto de entrada del servidor
+├── server.js                   # Punto de entrada del servidor
 ├── package.json                # Configuración del proyecto y dependencias
 └── README.md
 ```
@@ -143,9 +201,3 @@ La API sigue una separación clara por capas:
 - **Validations:** Validan datos de entrada antes de llegar a la lógica principal.
 
 ---
-
-## 📚 Autor
-
-Desarrollado
-📘 En curso: Introducción a JavaScript  
-🚀 Proyecto práctica profesional

@@ -23,6 +23,20 @@ const usuarioSchema = new Schema(
     telefono: {
       type: String,
     },
+
+    // Nuevo campo: DNI
+    dni: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+
+    // Nuevo campo: Fecha de nacimiento
+    fechaNacimiento: {
+      type: Date,
+      required: true,
+    },
+
     activo: {
       type: Boolean,
       default: true,
