@@ -18,114 +18,228 @@ import {
 
 import { validate } from "../validations/validators.js";
 
-/* --- Crear --- */
+/* --- Crear Usuario --- */
 export const createUserHandler = async (req, res, next) => {
   try {
+    // Validación de datos de entrada
     const validatedData = validate("usuario", req.body);
+
+    // Delegamos la lógica al controller
     const response = await createUserController(validatedData);
-    res.status(201).json(response);
-  } catch (error) {
-    next(error);
+
+    // Respuesta exitosa
+    return res.status(201).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (err) {
+    // Pasamos el error al middleware global
+    next(err);
   }
 };
 
 /* --- Lectura --- */
 export const getAllUsersHandler = async (req, res, next) => {
   try {
+    // Llamada al controller que obtiene todos los usuarios
     const response = await getAllUsersController();
-    return res.status(200).json(response);
+
+    // Respuesta estandarizada para el frontend
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
+    // Enviar error al middleware global
     next(err);
   }
 };
 
+/* --- Trae las estaditicas --- */
 export const getAllUserStatsHandler = async (req, res, next) => {
   try {
+    // Llamada al controller que obtiene las estadísticas
     const response = await getAllUsersStatsController();
-    return res.status(200).json(response);
+
+    // Respuesta estandarizada para el frontend
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
+    // Pasar el error al middleware global
     next(err);
   }
 };
 
+/* --- Buscar por id --- */
 export const getUserByIdHandler = async (req, res, next) => {
   try {
+    // Obtenemos el ID del usuario desde los parámetros de la URL
     const { id } = req.params;
+
+    // Llamamos al controller que busca al usuario por ID
     const response = await getUserByIdController(id);
-    return res.status(200).json(response);
+
+    // Respondemos con la información del usuario encontrada
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    // Si ocurre un error, devolvemos un JSON con status y mensaje
+    return res.status(err.status || 500).json({
+      success: false,
+      message: err.message || "Error interno del servidor",
+    });
   }
 };
 
+/* --- Buscar por email --- */
 export const getUsersByEmailHandler = async (req, res, next) => {
   try {
     const { email } = req.query;
+
+    // Validación de parámetro
+    if (!email) {
+      const err = new Error("El parámetro 'email' es obligatorio");
+      err.status = 400;
+      throw err;
+    }
+
+    // Lógica del controller
     const response = await getUsersByEmailController(email);
-    return res.status(200).json(response);
+
+    // Respuesta exitosa
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
+/* --- Buscar por nombre --- */
 export const getUsersByNameHandler = async (req, res, next) => {
   try {
     const { nombre } = req.query;
+
+    // Validación de parámetro
+    if (!nombre) {
+      const err = new Error("El parámetro 'nombre' es obligatorio");
+      err.status = 400;
+      throw err;
+    }
+
+    // Lógica del controller
     const response = await getUsersByNameController(nombre);
-    return res.status(200).json(response);
+
+    // Respuesta exitosa
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
+/* --- Buscar usuarios por rol --- */
 export const getUsersByRoleHandler = async (req, res, next) => {
   try {
     const { rol } = req.query;
+
+    // Validación del parámetro
+    if (!rol) {
+      const err = new Error("El parámetro 'rol' es obligatorio");
+      err.status = 400;
+      throw err;
+    }
+
+    // Lógica del controller
     const response = await getUsersByRolController(rol);
-    return res.status(200).json(response);
+
+    // Respuesta exitosa
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
-/*--- Estados --- */
+/* --- Filtrar usuarios por estado (activo/inactivo) --- */
 export const getUsersByStatusHandler = async (req, res, next) => {
   try {
     const { activo } = req.query;
 
+    // Validación del parámetro
+    if (activo === undefined) {
+      const err = new Error("El parámetro 'activo' es obligatorio");
+      err.status = 400;
+      throw err;
+    }
+
+    // Llamada al controller
     const response = await getUsersByStatusController(activo);
 
-    return res.status(200).json(response);
+    // Respuesta consistente
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
-/* UPdate */
-
+/* --- Actualizar usuario --- */
 export const updateUserHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const userData = req.body;
 
+    // Llamada al controller
     const response = await updateUserController(id, userData);
 
-    res.status(200).json(response);
+    // Respuesta consistente
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
+/* --- Actualizar estado de usuario --- */
 export const updateUserStatusHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { activo } = req.body;
 
+    // Llamada al controller
     const response = await updateUserStatusController(id, activo);
 
-    return res.status(200).json(response);
+    // Respuesta consistente para frontend
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
@@ -133,20 +247,36 @@ export const updateUserStatusHandler = async (req, res, next) => {
 export const deleteUserHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    // Llamada al controller
     const response = await deleteUserController(id);
 
-    return res.status(200).json(response);
+    // Respuesta consistente para el frontend
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
   } catch (err) {
-    next(err);
+    next(err); // Pasamos el error al middleware global
   }
 };
 
+/* --- Soft Delete --- */
 export const deleteSoftUserHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    // Llamada al controller
     const response = await deleteSoftUserController(id);
-    return res.status(200).json(response);
-  } catch (error) {
-    next(error);
+
+    // Respuesta consistente para el frontend
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (err) {
+    next(err); // Pasamos el error al middleware global
   }
 };

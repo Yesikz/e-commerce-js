@@ -1,5 +1,6 @@
 import Usuario from "../models/Usuarios.js";
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 /* =======================================================
  * CREATE: Controlador de crear usuario
@@ -28,12 +29,15 @@ export const createUserController = async (userData) => {
     throw err;
   }
 
-  /*  ===== Creación del usuario =====  */
+  // Hashear contraseña
+  const hashedPassword = await bcrypt.hash(contraseña, 10);
+
+  // Creación del usuario
   const newUser = new Usuario({
     nombre,
     nombreUsuario,
     email,
-    contraseña,
+    contraseña: hashedPassword,
     telefono,
     activo,
     rol,
@@ -42,10 +46,10 @@ export const createUserController = async (userData) => {
 
   await newUser.save();
 
-  /* ===== Respuesta ===== */
   return {
+    success: true,
     message: "Usuario creado exitosamente",
-    user: newUser,
+    data: newUser,
   };
 };
 
@@ -67,17 +71,16 @@ export const createUserController = async (userData) => {
 export const getAllUsersController = async () => {
   const users = await Usuario.find();
 
-  // Validación: verificar si hay usuarios
   if (!users.length) {
-    const err = new Error("No hay Usuarios");
+    const err = new Error("No hay usuarios registrados");
     err.status = 404;
     throw err;
   }
 
-  /* ===== Respuesta ===== */
   return {
+    success: true,
     message: "Usuarios encontrados",
-    users,
+    data: users,
   };
 };
 
@@ -123,17 +126,16 @@ export const getUserByIdController = async (id) => {
   }
 
   return {
+    success: true,
     message: "Usuario encontrado",
-    user,
+    data: user,
   };
 };
 
 export const getUsersByEmailController = async (email) => {
-  // Buscar usuarios por email
   const usersByEmail = await Usuario.find({ email });
 
-  // Validación: verificar si existe al menos un usuario
-  if (usersByEmail.length === 0) {
+  if (!usersByEmail.length) {
     const err = new Error(
       `No se encontró ningún usuario con el email: '${email}'`
     );
@@ -141,19 +143,17 @@ export const getUsersByEmailController = async (email) => {
     throw err;
   }
 
-  /* ===== Respuesta ===== */
   return {
-    message: "Usuario encontrado",
-    usersByEmail,
+    success: true,
+    message: "Usuario(s) encontrado(s)",
+    data: usersByEmail,
   };
 };
 
 export const getUsersByNameController = async (name) => {
-  // Buscar usuarios por nombre
   const usersByName = await Usuario.find({ nombre: name });
 
-  // Validación: verificar si existe al menos un usuario
-  if (usersByName.length === 0) {
+  if (!usersByName.length) {
     const err = new Error(
       `No se encontró ningún usuario con el nombre: '${name}'`
     );
@@ -161,62 +161,55 @@ export const getUsersByNameController = async (name) => {
     throw err;
   }
 
-  /* ===== Respuesta ===== */
   return {
-    message: "Usuario encontrado",
-    usersByName,
+    success: true,
+    message: "Usuario(s) encontrado(s)",
+    data: usersByName,
   };
 };
 
 export const getUsersByRolController = async (role) => {
-  // Validación: solo se admiten los roles definidos en el schema
   if (role !== "admin" && role !== "cliente") {
     const err = new Error("El parámetro 'role' debe ser 'admin' o 'cliente'");
     err.status = 400;
     throw err;
   }
 
-  // Buscar usuarios por rol
   const users = await Usuario.find({ rol: role });
 
-  if (users.length === 0) {
+  if (!users.length) {
     const err = new Error(`No se encontraron usuarios con rol '${role}'`);
     err.status = 404;
     throw err;
   }
 
   return {
+    success: true,
     message: `Usuarios con rol '${role}' encontrados`,
-    users,
+    data: users,
   };
 };
 
 export const getUsersByStatusController = async (isActive) => {
-  // Validación de string
+  // Validación y conversión a boolean
   if (typeof isActive === "string") {
     if (isActive !== "true" && isActive !== "false") {
       const err = new Error("El parámetro 'activo' debe ser 'true' o 'false'");
       err.status = 400;
       throw err;
     }
-    isActive = isActive === "true"; // conversión de tipo
+    isActive = isActive === "true";
   }
 
   // Filtrado por activo
   const users = await Usuario.find({ activo: isActive });
 
-  if (users.length === 0) {
-    const err = new Error(
-      `No hay usuarios ${isActive ? "activos" : "inactivos"}`
-    );
-    err.status = 404;
-    throw err;
-  }
-
-  /* ===== Respuesta ===== */
   return {
-    message: `Usuarios ${isActive ? "activos" : "inactivos"} encontrados`,
-    users,
+    success: true,
+    message: users.length
+      ? `Usuarios ${isActive ? "activos" : "inactivos"} encontrados`
+      : `No se encontraron usuarios ${isActive ? "activos" : "inactivos"}`,
+    data: users,
   };
 };
 
@@ -233,7 +226,7 @@ export const getUsersByStatusController = async (isActive) => {
  */
 
 export const updateUserController = async (id, userData) => {
-  // Validar ID
+  // Validar que el ID sea un ObjectId válido
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error("ID de usuario no válido");
     err.status = 400;
@@ -250,61 +243,74 @@ export const updateUserController = async (id, userData) => {
 
   // Preparación de campos a actualizar (solo los permitidos)
   const updatedFields = {};
+
   if (userData.nombre) updatedFields.nombre = userData.nombre;
   if (userData.nombreUsuario)
     updatedFields.nombreUsuario = userData.nombreUsuario;
   if (userData.email) updatedFields.email = userData.email;
-  if (userData.contraseña) updatedFields.contraseña = userData.contraseña; // hash si corresponde
+
+  // --- Hash de la contraseña ---
+  if (userData.contraseña) {
+    // Generar salt de bcrypt
+    const salt = await bcrypt.genSalt(10);
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(userData.contraseña, salt);
+    updatedFields.contraseña = hashedPassword;
+  }
+
   if (userData.telefono) updatedFields.telefono = userData.telefono;
   if (userData.activo !== undefined) updatedFields.activo = userData.activo;
   if (userData.rol) updatedFields.rol = userData.rol;
   if (userData.direccion) updatedFields.direccion = userData.direccion;
 
-  // Actualización en la DB
+  // Actualizar el usuario en la base de datos
   const userUpdate = await Usuario.findByIdAndUpdate(id, updatedFields, {
     new: true,
   });
 
   /* ===== Respuesta ===== */
   return {
+    success: true,
     message: "Usuario actualizado",
-    user: userUpdate,
+    data: userUpdate,
   };
 };
 
 export const updateUserStatusController = async (id, isActive) => {
-  // Validación de ID
+  // Validación: ID válido
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error("ID de usuario no válido");
     err.status = 400;
     throw err;
   }
 
-  // Validación de string
+  // Validación: convertir string a boolean
   if (typeof isActive === "string") {
     if (isActive !== "true" && isActive !== "false") {
       const err = new Error("El parámetro 'activo' debe ser 'true' o 'false'");
       err.status = 400;
       throw err;
     }
-    isActive = isActive === "true"; // conversión de tipo
+    isActive = isActive === "true";
   }
 
-  // Validación: existencia por ID
+  // Validación: existencia del usuario
   const user = await Usuario.findById(id);
   if (!user) {
-    const err = new Error(`No se encontró el usuario con el ID: '${id}'`);
+    const err = new Error(`No se encontró el usuario con el ID '${id}'`);
     err.status = 404;
     throw err;
   }
 
-  // Actualización del estado
+  // Actualizar estado
   user.activo = isActive;
   await user.save();
 
+  /* ===== Respuesta ===== */
   return {
-    message: "Usuario actualizado",
-    user,
+    success: true,
+    message: "Estado de usuario actualizado",
+    data: user,
   };
 };
 
@@ -317,7 +323,7 @@ export const updateUserStatusController = async (id, isActive) => {
  */
 
 export const deleteUserController = async (id) => {
-  // Validación de ID
+  // Validación: ID válido
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error("ID de usuario no válido");
     err.status = 400;
@@ -327,7 +333,7 @@ export const deleteUserController = async (id) => {
   // Buscar usuario por ID
   const user = await Usuario.findById(id);
   if (!user) {
-    const err = new Error(`Usuario con ID: '${id}' no encontrado`);
+    const err = new Error(`Usuario con ID '${id}' no encontrado`);
     err.status = 404;
     throw err;
   }
@@ -335,14 +341,16 @@ export const deleteUserController = async (id) => {
   // Eliminación permanente
   await Usuario.findByIdAndDelete(id);
 
+  /* ===== Respuesta ===== */
   return {
-    message: `Usuario con ID: '${id}' eliminado`,
-    user,
+    success: true,
+    message: `Usuario con ID '${id}' eliminado exitosamente`,
+    data: user,
   };
 };
 
 export const deleteSoftUserController = async (id) => {
-  // Validación de ID
+  // Validación: ID válido
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error("ID de usuario no válido");
     err.status = 400;
@@ -352,14 +360,14 @@ export const deleteSoftUserController = async (id) => {
   // Buscar usuario por ID
   const user = await Usuario.findById(id);
   if (!user) {
-    const err = new Error(`Usuario con ID: '${id}' no encontrado`);
+    const err = new Error(`Usuario con ID '${id}' no encontrado`);
     err.status = 404;
     throw err;
   }
 
   // Verificar si ya está inactivo
   if (!user.activo) {
-    const err = new Error(`El usuario con ID: '${id}' ya ha sido eliminado`);
+    const err = new Error(`El usuario con ID '${id}' ya ha sido eliminado`);
     err.status = 400;
     throw err;
   }
@@ -368,8 +376,10 @@ export const deleteSoftUserController = async (id) => {
   user.activo = false;
   await user.save();
 
+  /* ===== Respuesta ===== */
   return {
-    message: `Usuario con ID: '${id}' eliminado (soft delete)`,
-    user,
+    success: true,
+    message: `Usuario con ID '${id}' eliminado (soft delete)`,
+    data: user,
   };
 };

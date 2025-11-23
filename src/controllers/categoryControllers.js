@@ -44,8 +44,9 @@ export const createCategoriaController = async (categoriaData) => {
   });
 
   return {
+    success: true,
     message: "Categoría agregada exitosamente",
-    category: newCategory,
+    data: newCategory,
   };
 };
 
