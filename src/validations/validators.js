@@ -4,6 +4,7 @@ import { validateCategoria } from "../validations/categoriaValidation.js";
 import { validateCarrito } from "../validations/carritoValidation.js";
 import { validateLogin } from "../validations/authValidation.js";
 import { validateMarca } from "../validations/marcasValidation.js";
+import { validateMetodoPago } from "../validations/metodoPagoValidation.js";
 
 const schemas = {
   usuario: validateUsuario,
@@ -12,6 +13,7 @@ const schemas = {
   marca: validateMarca,
   carrito: validateCarrito,
   login: validateLogin,
+  metodoPago: validateMetodoPago,
 };
 
 export const validate = (model, data) => {
