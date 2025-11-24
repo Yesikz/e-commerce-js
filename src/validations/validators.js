@@ -5,7 +5,6 @@ import { validateCarrito } from "../validations/carritoValidation.js";
 import { validateLogin } from "../validations/authValidation.js";
 import { validateMarca } from "../validations/marcasValidation.js";
 import { validateMetodoPago } from "../validations/metodoPagoValidation.js";
-import { validateCarrito } from "../validations/carritoValidation.js";
 import { validateEnvio } from "../validations/enviosValidation.js";
 import { validatePedido } from "../validations/pedidosValidation.js";
 
