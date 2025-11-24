@@ -5,6 +5,7 @@ import categoryRoutes from "./categoryRoutes.js";
 import marcasRoutes from "./marcasRoutes.js";
 import authRoutes from "./authRoutes.js";
 import metodoPagoRouter from "./metodoPagoRoutes.js";
+import cartRouter from "./cartRoutes.js";
 
 const mainRoute = Router();
 
@@ -25,5 +26,8 @@ mainRoute.use("/auth", authRoutes);
 
 // Metodos de Pago
 mainRoute.use("/metodos-pago", metodoPagoRouter);
+
+// Carrito
+mainRoute.use("/cart", cartRouter);
 
 export default mainRoute;
