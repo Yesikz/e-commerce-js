@@ -16,6 +16,7 @@ import {
   deleteUserHandler,
 } from "../handlers/usuarioHandler.js";
 
+import { autenticar } from "../middleware/autenticarMiddleware.js";
 const userRoutes = Router();
 
 /* ===== Crear ===== */
@@ -27,6 +28,7 @@ userRoutes.get("/email", getUsersByEmailHandler);
 userRoutes.get("/name", getUsersByNameHandler);
 userRoutes.get("/rol", getUsersByRoleHandler);
 userRoutes.get("/status", getUsersByStatusHandler);
+userRoutes.get("/test", autenticar, getAllUsersHandler);
 
 /* userRoutes.get('/token', verifyToken, authorizationAdmin, getAllUsersHandler); */
 

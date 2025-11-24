@@ -1,6 +1,6 @@
 import Usuario from "../models/Usuarios.js";
 import bcrypt from "bcryptjs";
-import { generarToken } from "../utils/authToken.js";
+import { generarToken } from "../middleware/generarTokenMiddleware.js";
 
 /*==============================
      Registrar un nuevo usuario
