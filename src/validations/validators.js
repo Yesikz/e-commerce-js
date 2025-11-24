@@ -3,11 +3,13 @@ import { validateProducto } from "../validations/productosValidation.js";
 import { validateCategoria } from "../validations/categoriaValidation.js";
 import { validateCarrito } from "../validations/carritoValidation.js";
 import { validateLogin } from "../validations/authValidation.js";
+import { validateMarca } from "../validations/marcasValidation.js";
 
 const schemas = {
   usuario: validateUsuario,
   producto: validateProducto,
   categoria: validateCategoria,
+  marca: validateMarca,
   carrito: validateCarrito,
   login: validateLogin,
 };
