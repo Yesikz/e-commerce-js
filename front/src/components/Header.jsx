@@ -1,11 +1,13 @@
-import "../styles/styles.css";
+import { Link } from "react-router-dom";
+import NavBar from "./NavBar.jsx";
 
-function Header() {
+const Header = () => {
   return (
     <header>
-      <h1>E-Commerce JS</h1>
+      <h1 style={{ padding: "1rem" }}>E-COMMERCE-JS</h1>
+      <NavBar />
     </header>
   );
-}
+};
 
 export default Header;
