@@ -7,7 +7,12 @@ const metodoPagoSchema = new Schema(
       enum: ["tarjeta", "transferencia", "mercadopago"],
       required: true,
     },
+    activo: {
+      type: Boolean,
+      default: true,
+    },
   },
+
   { versionKey: false }
 );
 
