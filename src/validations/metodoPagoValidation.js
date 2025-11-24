@@ -11,4 +11,8 @@ export const validateMetodoPago = Joi.object({
       "any.required": "El nombre del método de pago es obligatorio.",
       "string.empty": "El nombre del método de pago no puede estar vacío.",
     }),
+
+  activo: Joi.boolean().optional().messages({
+    "boolean.base": "El campo 'activo' debe ser verdadero o falso.",
+  }),
 });
