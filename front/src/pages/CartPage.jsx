@@ -4,8 +4,7 @@ import "../Style/styles.css";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const { carrito, eliminarDelCarrito, vaciarCarrito } =
-    useContext(CartContext);
+  const { carrito, eliminarDelCarrito, vaciarCarrito } = useContext(CartContext);
 
   const total = carrito.reduce(
     (acc, item) => acc + item.precio * item.cantidad,
@@ -13,46 +12,44 @@ const CartPage = () => {
   );
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Carrito de Compras</h1>
+    <div className="cart-container">
+      <h1 className="cart-title">Carrito de Compras</h1>
 
       {carrito.length === 0 ? (
-        <p>Tu carrito está vacío.</p>
+        <p className="cart-empty">Tu carrito está vacío.</p>
       ) : (
         <>
-          {carrito.map((item) => (
-            <div
-              key={item.id}
-              
-            >
-              <div>
-                <h3>{item.nombre}</h3>
-                <p>Cantidad: {item.cantidad}</p>
-                <p>Subtotal: ${item.precio * item.cantidad}</p>
+          <div className="cart-items">
+            {carrito.map((item) => (
+              <div key={item.id} className="cart-item">
+                
+                <div className="cart-item-info">
+                  <h3>{item.nombre}</h3>
+                  <p>Cantidad: {item.cantidad}</p>
+                  <p>Subtotal: ${item.precio * item.cantidad}</p>
+                </div>
+
+                <button
+                  onClick={() => eliminarDelCarrito(item.id)}
+                  className="btn-remove"
+                >
+                  Eliminar
+                </button>
               </div>
+            ))}
+          </div>
 
-              <button
-                onClick={() => eliminarDelCarrito(item.id)}
-               
-              >
-                Eliminar
-              </button>
-            </div>
-          ))}
+          <h2 className="cart-total">Total: ${total}</h2>
 
-          <h2>Total: ${total}</h2>
-
-          <button
-            onClick={vaciarCarrito}
-          >
-            Vaciar Carrito
-          </button>
-
-          <Link to="/checkout">
-            <button >
-              Ir a Checkout
+          <div className="cart-actions">
+            <button onClick={vaciarCarrito} className="btn-empty">
+              Vaciar Carrito
             </button>
-          </Link>
+
+            <Link to="/checkout">
+              <button className="btn-checkout">Ir a Checkout</button>
+            </Link>
+          </div>
         </>
       )}
     </div>

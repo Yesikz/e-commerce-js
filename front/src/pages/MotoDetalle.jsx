@@ -1,29 +1,48 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { agregarCarrito } from "../redux/slices/motosSlice";
+import "../style/styles.css";
 
 const MotoDetalle = () => {
   const { id } = useParams();
   const motos = useSelector(state => state.motos.lista);
-  const moto = motos.find(m => m.id === parseInt(id));
   const dispatch = useDispatch();
 
-  if (!moto) return <p style={{ padding: "1rem" }}>Producto no encontrado.</p>;
+  const moto = motos.find(m => m.id === parseInt(id));
+
+  if (!moto) {
+    return (
+      <div className="detalle-container">
+        <p className="detalle-noencontrado">Producto no encontrado.</p>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>{moto.nombre}</h2>
-      <img src={moto.imagen} alt={moto.nombre} style={{ width: "400px", borderRadius: "8px" }} />
-      <p>{moto.descripcion}</p>
-      <strong>Precio: ${moto.precio}</strong>
-      <button
-        onClick={() => dispatch(agregarCarrito(moto))}
-        style={{ display: "block", marginTop: "1rem", padding: "0.5rem 1rem", backgroundColor: "#222", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}
-      >
-        Añadir al carrito
-      </button>
+    <div className="detalle-container">
+      <div className="detalle-card">
+        <img
+          src={moto.imagen}
+          alt={moto.nombre}
+          className="detalle-img"
+        />
+
+        <div className="detalle-info">
+          <h2>{moto.nombre}</h2>
+          <p className="detalle-descripcion">{moto.descripcion}</p>
+          <p className="detalle-precio">Precio: ${moto.precio}</p>
+
+          <button
+            className="btn-agregar"
+            onClick={() => dispatch(agregarCarrito(moto))}
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default MotoDetalle;
+

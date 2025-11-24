@@ -1,12 +1,26 @@
 import { Link } from "react-router-dom";
-import NavBar from "./NavBar.jsx";
+import NavBar from "./NavBar";
 
 const Header = () => {
   return (
-    <header>
-      <h1 style={{ padding: "1rem" }}>E-COMMERCE-JS</h1>
+    <>
+      <header className="header-container">
+
+     
+        <Link to="/" className="header-logo-link">
+          <img
+            src="/src/assets/img/logo.png"
+            alt="Logo NitroRiders"
+            className="header-logo"
+          />
+        </Link>
+
+        <h1 className="header-title">NitroRiders</h1>
+      </header>
+
+     
       <NavBar />
-    </header>
+    </>
   );
 };
 

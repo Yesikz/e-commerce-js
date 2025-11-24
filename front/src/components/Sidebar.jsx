@@ -48,3 +48,4 @@ const Sidebar = ({ categorias, filtroCategoria, categoriaSeleccionada }) => {
 
 export default Sidebar;
 
+

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/usuarioSlice";
+import "../style/styles.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -10,25 +11,47 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password) {
-      dispatch(login({ email }));
-      setMensaje("Login exitoso!");
-    } else {
+
+    if (email.trim() === "" || password.trim() === "") {
       setMensaje("Por favor completa todos los campos.");
+      return;
     }
+
+    dispatch(login({ email }));
+    setMensaje("Login exitoso!");
   };
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <label>Contraseña:</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-        <button type="submit">Ingresar</button>
-      </form>
-      {mensaje && <p>{mensaje}</p>}
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">Iniciar sesión</h2>
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label>Email</label>
+          <input
+            type="email"
+            className="auth-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label>Contraseña</label>
+          <input
+            type="password"
+            className="auth-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit" className="auth-btn">
+            Ingresar
+          </button>
+        </form>
+
+        {mensaje && <p className="auth-msg">{mensaje}</p>}
+      </div>
     </div>
   );
 };

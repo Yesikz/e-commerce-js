@@ -1,40 +1,60 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NavBar = () => {
-  const carrito = useSelector(state => state.motos.carrito);
-  const totalProductos = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  const carrito = useSelector(state => state.motos.carrito || []);
+  const totalProductos = carrito.reduce((acc, item) => acc + (item.cantidad || 0), 0);
 
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const navigate = useNavigate();
 
-  const cerrarMenu = () => setMenuAbierto(false);
+  const toggleMenu = () => setMenuAbierto(prev => !prev);
+  const cerrarMenuYNavegar = (to) => {
+    setMenuAbierto(false);
+    navigate(to);
+  };
 
   return (
-    <nav className="main-nav">
-      <div className="nav-left">
+    <nav className="navbar" aria-label="Main navigation">
+      <div className="navbar-left">
         <button
-          className="menu-toggle"
-          onClick={() => setMenuAbierto(!menuAbierto)}
+          className="navbar-menu-toggle"
+          onClick={toggleMenu}
+          aria-expanded={menuAbierto}
+          aria-label="Abrir menú"
         >
-          &#9776;
+          ☰
         </button>
-        <ul className={`nav-links ${menuAbierto ? "open" : ""}`}>
-          <li><NavLink to="/" onClick={cerrarMenu}>Home</NavLink></li>
-          <li><NavLink to="/productos" onClick={cerrarMenu}>Productos</NavLink></li>
-          <li><NavLink to="/login" onClick={cerrarMenu}>Login</NavLink></li>
-          <li><NavLink to="/registro" onClick={cerrarMenu}>Registro</NavLink></li>
-        </ul>
+
+        
       </div>
-      <div className="nav-right">
-        <NavLink to="/checkout" className="cart-link">
-          Carrito ({totalProductos})
+
+      <ul className={`navbar-links ${menuAbierto ? "navbar-open" : ""}`}>
+        <li>
+      
+          <button className="nav-button-link" onClick={() => cerrarMenuYNavegar("/")}>Home</button>
+        </li>
+        <li>
+          <button className="nav-button-link" onClick={() => cerrarMenuYNavegar("/productos")}>Productos</button>
+        </li>
+        <li>
+          <button className="nav-button-link" onClick={() => cerrarMenuYNavegar("/login")}>Login</button>
+        </li>
+        <li>
+          <button className="nav-button-link" onClick={() => cerrarMenuYNavegar("/registro")}>Registro</button>
+        </li>
+      </ul>
+
+      <div className="navbar-right">
+        <NavLink to="/checkout" className="navbar-cart" onClick={() => setMenuAbierto(false)}>
+          Carrito <span className="cart-count">({totalProductos})</span>
         </NavLink>
       </div>
-      {menuAbierto && <div className="overlay" onClick={cerrarMenu}></div>}
+
+      {menuAbierto && <div className="navbar-overlay" onClick={() => setMenuAbierto(false)} />}
     </nav>
   );
 };
 
 export default NavBar;
-

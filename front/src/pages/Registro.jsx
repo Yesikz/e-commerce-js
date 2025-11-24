@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../style/styles.css";
 
 const Registro = () => {
   const [nombre, setNombre] = useState("");
@@ -8,27 +9,52 @@ const Registro = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (nombre && email && password) {
       setMensaje(`Usuario ${nombre} registrado correctamente!`);
-      setNombre(""); setEmail(""); setPassword("");
+      setNombre("");
+      setEmail("");
+      setPassword("");
     } else {
       setMensaje("Completa todos los campos.");
     }
   };
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>Registro</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
+    <div className="form-container">
+      <h2 className="form-title">Registro</h2>
+
+      <form onSubmit={handleSubmit} className="form-card">
         <label>Nombre:</label>
-        <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} required style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }} />
+        <input
+          type="text"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          required
+        />
+
         <label>Email:</label>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
         <label>Contraseña:</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} required style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }} />
-        <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: "#222", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>Registrar</button>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button type="submit" className="btn-submit">
+          Registrar
+        </button>
       </form>
-      {mensaje && <p>{mensaje}</p>}
+
+      {mensaje && <p className="form-message">{mensaje}</p>}
     </div>
   );
 };

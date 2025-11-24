@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { vaciarCarrito } from "../redux/slices/motosSlice";
 import { useState } from "react";
+import "../style/styles.css";
 
 const Checkout = () => {
   const carrito = useSelector(state => state.motos.carrito);
@@ -10,7 +11,10 @@ const Checkout = () => {
   const [direccion, setDireccion] = useState("");
   const [compraFinalizada, setCompraFinalizada] = useState(false);
 
-  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  const total = carrito.reduce(
+    (acc, item) => acc + item.precio * item.cantidad,
+    0
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,29 +26,58 @@ const Checkout = () => {
 
   if (compraFinalizada) {
     return (
-      <div style={{ padding: "1rem" }}>
-        <h2>¡Gracias por tu compra, {nombre}!</h2>
-        <p>Resumen enviado a: {email}</p>
+      <div className="checkout-container">
+        <h2 className="checkout-title">
+          ¡Gracias por tu compra, {nombre}!
+        </h2>
+        <p className="checkout-subtext">
+          Resumen enviado a: {email}
+        </p>
       </div>
     );
   }
 
   if (carrito.length === 0) {
-    return <p style={{ padding: "1rem" }}>Tu carrito está vacío.</p>;
+    return (
+      <div className="checkout-container">
+        <p className="checkout-empty">Tu carrito está vacío.</p>
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2>Checkout</h2>
-      <p>Total a pagar: ${total}</p>
-      <form onSubmit={handleSubmit} style={{ maxWidth: "400px" }}>
+    <div className="checkout-container">
+      <h2 className="checkout-title">Checkout</h2>
+      <p className="checkout-total">Total a pagar: <strong>${total}</strong></p>
+
+      <form className="checkout-form" onSubmit={handleSubmit}>
         <label>Nombre:</label>
-        <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} required />
+        <input
+          type="text"
+          value={nombre}
+          onChange={e => setNombre(e.target.value)}
+          required
+        />
+
         <label>Email:</label>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          required
+        />
+
         <label>Dirección:</label>
-        <input type="text" value={direccion} onChange={e => setDireccion(e.target.value)} required />
-        <button type="submit">Finalizar Compra</button>
+        <input
+          type="text"
+          value={direccion}
+          onChange={e => setDireccion(e.target.value)}
+          required
+        />
+
+        <button className="btn-add" type="submit">
+          Finalizar Compra
+        </button>
       </form>
     </div>
   );
