@@ -1,17 +1,106 @@
-# React + Vite
+# NitroRiders
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NitroRiders es una **tienda online de motocicletas** creada con **React**, **Redux Toolkit** y **React Router**, con un diseño moderno y responsive. Permite explorar motos, ver detalles, agregar productos al carrito, registrarse, loguearse y finalizar compras.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📁 Estructura del proyecto
 
-## React Compiler
+```
+src/
+├─ api/                 # Simulación de API 
+│  └─ motos.js
+├─ assets/img/          # Imágenes de las motos
+├─ components/
+│  ├─ Header.jsx
+│  ├─ Footer.jsx
+│  ├─ NavBar.jsx
+│  ├─ Sidebar.jsx
+│  ├─ Paginacion.jsx
+│  ├─ ProductCard.jsx
+│  └─ MotoCardeliminar.jsx
+├─ pages/
+│  ├─ Home.jsx
+│  ├─ Productos.jsx
+│  ├─ MotoDetalle.jsx
+│  ├─ Login.jsx
+│  ├─ Registro.jsx
+│  └─ Checkout.jsx
+├─ redux/
+│  ├─ store.js
+│  └─ slices/
+│     ├─ motosSlice.js
+│     └─ usuarioSlice.js
+├─ styles/
+│  └─ styles.css
+├─ App.jsx
+├─ main.jsx
+├─ index.css
+└─ data/
+   └─ motos.js
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚡ Tecnologías utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project....
+* **React** para la interfaz
+* **Redux Toolkit** para manejar estado global
+* **React Router** para navegación
+* **CSS** para estilos modernos y responsive
+* **LocalStorage** para persistir carrito de compras
 
+---
+
+## 🚀 Funcionalidades
+
+* Listado de motos y filtrado por categorías
+* Detalle de cada moto (imagen, descripción, precio)
+* Carrito de compras 
+* Registro y login de usuarios
+* Checkout (simulado)
+* Diseño responsive para móviles, tablet y desktop
+
+---
+
+## 🛠 Instalación
+
+1. Clonar el repositorio:
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+```
+
+2. Instalar dependencias:
+
+```bash
+npm install
+```
+
+3. Iniciar el proyecto:
+
+```bash
+npm run dev
+```
+
+4. Abrir en el navegador
+
+---
+
+## 🧩 Redux
+
+* `motosSlice.js`: Maneja lista de motos y carrito
+* `usuarioSlice.js`: Maneja login y logout del usuario
+* `store.js`: Combina todos los slices
+
+---
+
+## 💡 Notas
+
+* El proyecto incluye un contexto `CartContext.jsx` que se puede eliminar si se usa solo Redux.
+* Las imágenes de las motos se encuentran en `src/assets/img/`.
+* Los estilos principales están en `src/style/styles.css`.
+
+
+
+¡Listo! Ahora NitroRiders está preparado para probar y seguir desarrollando.
