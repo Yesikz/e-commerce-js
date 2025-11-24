@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"nombre\": \"Leandro Alegre\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@example.com\",\n  \"contraseña\": \"MiContraseñaSegura\",\n  \"telefono\": \"123456789\",\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Calle Falsa\",\n      \"numero\": \"123\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}\n",
+							"raw": "{\n  \"nombre\": \"Leandro Alegre\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@example.com\",\n  \"telefono\": \"123456789\",\n  \"contraseña\": \"MiContraseñaSegura\",\n  \"dni\": \"12345678\",\n  \"fechaNacimiento\": \"1990-05-15\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -82,7 +82,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"nombre\": \"Leandro\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@mail.com\",\n  \"contraseña\": \"123456\",\n  \"telefono\": \"1234567890\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Avenida Falsa\",\n      \"numero\": \"1234\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}",
+									"raw": "{\n  \"nombre\": \"Leandro\",\n  \"nombreUsuario\": \"leandro123\",\n  \"email\": \"leandro@mail.com\",\n  \"contraseña\": \"123456\",\n  \"telefono\": \"1234567890\",\n  \"dni\": \"12345678\",\n  \"fechaNacimiento\": \"1990-05-15\",\n  \"activo\": true,\n  \"rol\": \"cliente\",\n  \"direccion\": [\n    {\n      \"calle\": \"Avenida Falsa\",\n      \"numero\": \"1234\",\n      \"ciudad\": \"Buenos Aires\",\n      \"provincia\": \"Buenos Aires\",\n      \"codigoPostal\": \"1000\",\n      \"pais\": \"Argentina\"\n    }\n  ]\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -150,6 +150,36 @@
 									"port": "3000",
 									"path": [
 										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllUsersTets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2MzkzOTQ1MSwiZXhwIjoxNzY0MDI1ODUxfQ.qsEiYutWXj7UrDZa6KSAayi4yKMNPw_PqoIS3IgDPhA",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users/test",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"test"
 									]
 								}
 							},
@@ -437,10 +467,6 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "Products",
-			"item": []
 		},
 		{
 			"name": "Category",
@@ -750,6 +776,978 @@
 							"response": []
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "MetodoPago",
+			"item": [
+				{
+					"name": "Create",
+					"item": [
+						{
+							"name": "CreateMetoPago",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"tarjeta\",\n  \"activo\": true\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateMetoPago1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"transferencia\",\n  \"activo\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CreateMetoPago3",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"mercadopago\",\n  \"activo\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "GetAllMetodoPago",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdMetodoPago",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/69246ad9d1be1b8c4d10f667",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"69246ad9d1be1b8c4d10f667"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByNameMetodoPago",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/name?nombre=tarjeta",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"name"
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": "tarjeta"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"item": [
+						{
+							"name": "RestoreMetodoPago",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/restore/69246aa8d1be1b8c4d10f664",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"restore",
+										"69246aa8d1be1b8c4d10f664"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateMetodoPago",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"tarjeta\",\n  \"activo\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/69246aa8d1be1b8c4d10f664",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"69246aa8d1be1b8c4d10f664"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "DeleteSoftMetodoPago",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/soft/69246aa8d1be1b8c4d10f664",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"soft",
+										"69246aa8d1be1b8c4d10f664"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/metodos-pago/69246ad9d1be1b8c4d10f667",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"metodos-pago",
+										"69246ad9d1be1b8c4d10f667"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Create",
+					"item": [
+						{
+							"name": "CreateCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GetAll",
+					"item": [
+						{
+							"name": "GetByActiveCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart/active",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										"active"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetByIdCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6924cb6ca2fd88910dcb2012"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCartsByUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart/user/:id?estado=activo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										"user",
+										":id"
+									],
+									"query": [
+										{
+											"key": "estado",
+											"value": "activo"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "69238d3a07b178b9c1463f21"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAllCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"item": [
+						{
+							"name": "AddProductCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cantidad\": 2\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cart/:cartId/product/:productoId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":cartId",
+										"product",
+										":productoId"
+									],
+									"variable": [
+										{
+											"key": "cartId",
+											"value": "6924cb6ca2fd88910dcb2012"
+										},
+										{
+											"key": "productoId",
+											"value": "6924bf8f219a0f0e9c2e962f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ClearCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAxODg1OSwiZXhwIjoxNzY0MTA1MjU5fQ.oUekoH4qEuoB4cXqOts5XlCRez1fOQTToTR2EKID5HY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cart/:id/clear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":id",
+										"clear"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6924c21a219a0f0e9c2e9637"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "checkout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAxODg1OSwiZXhwIjoxNzY0MTA1MjU5fQ.oUekoH4qEuoB4cXqOts5XlCRez1fOQTToTR2EKID5HY",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"metodoPago\": \"673014440c88d6aa5a957cb3\",\n  \"direccion\": {\n    \"calle\": \"Av Siemprevivas\",\n    \"numero\": \"742\",\n    \"ciudad\": \"Springfield\",\n    \"provincia\": \"Córdoba\",\n    \"codigoPostal\": \"5000\",\n    \"pais\": \"Argentina\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cart/:cartId/checkout",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":cartId",
+										"checkout"
+									],
+									"variable": [
+										{
+											"key": "cartId",
+											"value": "6924cb6ca2fd88910dcb2012"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"item": [
+						{
+							"name": "RemoveProductCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cantidad\": 2\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cart/:cartId/product/:productoId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":cartId",
+										"product",
+										":productoId"
+									],
+									"variable": [
+										{
+											"key": "cartId",
+											"value": "6924c21a219a0f0e9c2e9637"
+										},
+										{
+											"key": "productoId",
+											"value": "6924bf8f219a0f0e9c2e962f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MjM4ZDNhMDdiMTc4YjljMTQ2M2YyMSIsIm5vbWJyZVVzdWFyaW8iOiJsZWFuZHJvMTIzIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc2NDAwNDIzMiwiZXhwIjoxNzY0MDkwNjMyfQ.rVn72wWF6N2ZBwoRhaZT9doRPLfoPrKRIQWI7BHUkiQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"cantidad\": 2\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cart/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cart",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6924c21a219a0f0e9c2e9637"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Marcas",
+			"item": [
+				{
+					"name": "Crear Marca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Yamaha\",\r\n    \"paisOrigen\": \"Japón\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/marcas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"marcas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Marca",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/marcas/6923bade8646f3a2c3bc3cb5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"marcas",
+								"6923bade8646f3a2c3bc3cb5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todas las marcas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/marcas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"marcas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Marca por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/marcas/6923bcf48646f3a2c3bc3cc6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"marcas",
+								"6923bcf48646f3a2c3bc3cc6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Marca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Kawasaki\",\r\n    \"paisOrigen\": \"Japón\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/marcas/6923bcf48646f3a2c3bc3cc6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"marcas",
+								"6923bcf48646f3a2c3bc3cc6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Todos los productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products?nombre=Honda",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "Honda"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products/6923d17be176dcb853944ea8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"6923d17be176dcb853944ea8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"nombre\": \"Kawasaki\",\r\n        \"descripcion\": \"Twin, four-stroke\",\r\n        \"precio\": 8000,\r\n        \"stock\": 10,\r\n        \"año\": 2022,\r\n        \"categoria\": \"6923bca28646f3a2c3bc3cc3\",\r\n        \"marca\": \"6923bcf48646f3a2c3bc3cc6\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualiza un producto",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"nombre\": \"Yamaha\",\r\n        \"descripcion\": \"MT07 Naked Sport\",\r\n        \"precio\": 7000,\r\n        \"stock\": 10,\r\n        \"año\": 2022,\r\n        \"categoria\": \"6923bca28646f3a2c3bc3cc3\",\r\n        \"marca\": \"6923bcf48646f3a2c3bc3cc6\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/6923d1fe788a2e4c5b1d6364",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"6923d1fe788a2e4c5b1d6364"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un producto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \r\n        \"article\": \"Remera\",\r\n        \"price\": 25\r\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:3000/products/6923bb778646f3a2c3bc3cb8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"6923bb778646f3a2c3bc3cb8"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
