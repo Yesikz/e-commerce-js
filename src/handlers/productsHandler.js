@@ -1,28 +1,107 @@
-import { allProductsController } from "../controllers/productsControllers.js";
+import {
+  createProductsController,
+  getAllProductsController,
+  getProductsByIdControllers,
+  getProductsByNameControllers,
+  updateProductControllers,
+  deleteProductControllers,
+} from "../controllers/productsControllers.js";
+import { validate } from "../validations/validators.js";
 
-//trae los productos
-const getProducts = (req, res) => {
+//crea un producto
+export const createProductsHandler = async (req, res, next) => {
   try {
-    const response = allProductsController();
-    res.send(response);
-  } catch (error) {
-    res.status(200).send(error.message );
+    // Validación de datos
+    const validatedData = validate("producto", req.body);
+
+    const response = await createProductsController(validatedData);
+
+    return res.status(201).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (err) {
+    next(err);
   }
 };
 
-//crea un producto
-const createProducts = (req, res) => {
-  res.send("Creando un producto");
+//trae todos los productos de la base de datos
+export const getAllProductsHandler = async (req, res, next) => {
+  try {
+    const response = await getAllProductsController();
+
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response.data,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-//actualiza un producto
-const updateProduct = (req, res) => {
-  res.send(`Actualizando el producto con id ${req.params.id}`);
+//trae todos los productos por id
+export const getProductsByIdHandler = async (req, res, next) => {
+  try {
+    const response = await getProductsByIdControllers(req.params.id);
+
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-//elimina un producto
-const deleteProduct = (req, res) => {
-  res.send(`Eliminando el producto con id ${req.params.id}`);
+//trae todos los productos por nombre
+export const getProductsByNameHandler = async (req, res, next) => {
+  try {
+    const response = await getProductsByNameControllers(req.params.nombre);
+
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
-export { getProducts, createProducts, updateProduct, deleteProduct };
+//Actualizar producto
+export const updateProductHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const productData = req.body;
+
+    const response = await updateProductControllers(id, productData);
+
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/* --- Delete --- */
+export const deleteProductHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const response = await deleteProductControllers(id);
+
+    return res.status(200).json({
+      success: true,
+      message: response.message,
+      data: response,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
