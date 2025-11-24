@@ -16,7 +16,10 @@ const pedidoSchema = new Schema(
       },
     ],
 
-    total: { type: Number, required: true },
+    total: {
+      type: Number,
+      required: true,
+    },
 
     metodoPago: {
       type: Schema.Types.ObjectId,
@@ -24,15 +27,18 @@ const pedidoSchema = new Schema(
       required: true,
     },
 
+    direccion: {
+      calle: String,
+      numero: String,
+      ciudad: String,
+      provincia: String,
+      codigoPostal: String,
+      pais: String,
+    },
     estado: {
       type: String,
       enum: ["pendiente", "pagado", "enviado", "entregado", "cancelado"],
       default: "pendiente",
-    },
-
-    envio: {
-      type: Schema.Types.ObjectId,
-      ref: "Envio",
     },
   },
   { timestamps: true, versionKey: false }

@@ -1,7 +1,22 @@
 import Joi from "joi";
+// Validación de ObjectId de Mongo con mensaje personalizado
+const objectIdValidator = (value, helpers) => {
+  if (!mongoose.Types.ObjectId.isValid(value)) {
+    return helpers.message("El ID del pedido no es válido.");
+  }
+  return value;
+};
 
 // Validación Joi para Envío
 export const validateEnvio = Joi.object({
+  pedido: Joi.string()
+    .custom(objectIdValidator, "validación ObjectId")
+    .required()
+    .messages({
+      "any.required": "El ID del pedido es obligatorio.",
+      "string.empty": "El ID del pedido no puede estar vacío.",
+    }),
+
   direccion: Joi.object({
     calle: Joi.string().trim().min(2).max(100).required().messages({
       "string.base": "La calle debe ser un texto.",
@@ -45,10 +60,12 @@ export const validateEnvio = Joi.object({
       "string.max": "El país no puede superar los 50 caracteres.",
       "any.required": "El país es obligatorio.",
     }),
-  }).required().messages({
-    "any.required": "La dirección es obligatoria.",
-    "object.base": "La dirección debe ser un objeto válido.",
-  }),
+  })
+    .required()
+    .messages({
+      "any.required": "La dirección es obligatoria.",
+      "object.base": "La dirección debe ser un objeto válido.",
+    }),
 
   costo: Joi.number().min(0).required().messages({
     "number.base": "El costo debe ser un número.",

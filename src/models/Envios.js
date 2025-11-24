@@ -2,6 +2,11 @@ import { Schema, model } from "mongoose";
 
 const envioSchema = new Schema(
   {
+    pedido: {
+      type: Schema.Types.ObjectId,
+      ref: "Pedido",
+      required: true,
+    },
     direccion: {
       calle: String,
       numero: String,
@@ -10,14 +15,10 @@ const envioSchema = new Schema(
       codigoPostal: String,
       pais: String,
     },
-    costo: {
-      type: Number,
-      required: true,
-    },
     estado: {
       type: String,
-      enum: ["preparando", "en camino", "entregado"],
-      default: "preparando",
+      enum: ["pendiente", "en camino", "entregado"],
+      default: "pendiente",
     },
   },
   { versionKey: false }

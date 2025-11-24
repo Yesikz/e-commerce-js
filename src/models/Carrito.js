@@ -3,25 +3,35 @@ import { Schema, model } from "mongoose";
 const carritoSchema = new Schema(
   {
     usuario: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Usuario",
       required: true,
     },
-
     productos: [
       {
         producto: {
-          type: mongoose.Schema.Types.ObjectId,
+          type: Schema.Types.ObjectId,
           ref: "Producto",
+          required: true,
         },
         cantidad: {
           type: Number,
-          default: 1,
+          required: true,
+          min: 1,
         },
       },
     ],
+    total: {
+      type: Number,
+      default: 0,
+    },
+    estado: {
+      type: String,
+      enum: ["activo", "finalizado"],
+      default: "activo",
+    },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 export default model("Carrito", carritoSchema);
