@@ -6,9 +6,12 @@ export const obtenerMotos = createAsyncThunk("motos/obtenerMotos", async () => {
   return respuesta;
 });
 
+
+const savedCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
 const initialState = {
   lista: [],
-  carrito: [],
+  carrito: savedCarrito,
   estado: "idle",
   error: null
 };
@@ -18,26 +21,37 @@ export const motosSlice = createSlice({
   initialState,
   reducers: {
     agregarCarrito: (state, action) => {
-      const { id, cantidad = 1 } = action.payload; 
+      const { id } = action.payload;
       const existe = state.carrito.find(item => item.id === id);
-
       if (existe) {
-        state.carrito = state.carrito
-          .map(item =>
-            item.id === id
-              ? { ...item, cantidad: Math.max(item.cantidad + cantidad, 0) }
-              : item
-          )
-          .filter(item => item.cantidad > 0); 
-      } else if (cantidad > 0) {
-        state.carrito.push({ ...action.payload, cantidad });
+        existe.cantidad += 1;
+      } else {
+        state.carrito.push({ ...action.payload, cantidad: 1 });
       }
+      localStorage.setItem("carrito", JSON.stringify(state.carrito));
+    },
+    incrementarCantidad: (state, action) => {
+      const item = state.carrito.find(i => i.id === action.payload);
+      if (item) item.cantidad += 1;
+      localStorage.setItem("carrito", JSON.stringify(state.carrito));
+    },
+    disminuirCantidad: (state, action) => {
+      const item = state.carrito.find(i => i.id === action.payload);
+      if (item) {
+        item.cantidad -= 1;
+        if (item.cantidad <= 0) {
+          state.carrito = state.carrito.filter(i => i.id !== action.payload);
+        }
+      }
+      localStorage.setItem("carrito", JSON.stringify(state.carrito));
     },
     eliminarCarrito: (state, action) => {
       state.carrito = state.carrito.filter(item => item.id !== action.payload);
+      localStorage.setItem("carrito", JSON.stringify(state.carrito));
     },
     vaciarCarrito: (state) => {
       state.carrito = [];
+      localStorage.setItem("carrito", JSON.stringify(state.carrito));
     }
   },
   extraReducers: (builder) => {
@@ -54,5 +68,12 @@ export const motosSlice = createSlice({
   }
 });
 
-export const { agregarCarrito, eliminarCarrito, vaciarCarrito } = motosSlice.actions;
+export const {
+  agregarCarrito,
+  incrementarCantidad,
+  disminuirCantidad,
+  eliminarCarrito,
+  vaciarCarrito
+} = motosSlice.actions;
+
 export default motosSlice.reducer;
