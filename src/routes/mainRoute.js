@@ -6,6 +6,8 @@ import marcasRoutes from "./marcasRoutes.js";
 import authRoutes from "./authRoutes.js";
 import metodoPagoRouter from "./metodoPagoRoutes.js";
 import cartRouter from "./cartRoutes.js";
+import pedidosRoutes from "./pedidosRoutes.js"; 
+import enviosRoutes from "./enviosRoutes.js"; 
 
 const mainRoute = Router();
 
@@ -30,4 +32,9 @@ mainRoute.use("/metodos-pago", metodoPagoRouter);
 // Carrito
 mainRoute.use("/cart", cartRouter);
 
+// Pedidos
+mainRoute.use("/pedidos", pedidosRoutes);
+
+// Envios
+mainRoute.use("/envios", enviosRoutes); 
 export default mainRoute;

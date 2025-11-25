@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "58d92d2b-871f-4ab0-a098-df93467cee1c",
+		"_postman_id": "b70d32ac-a090-4bd5-8e50-423c26efb6a8",
 		"name": "E-COMMERCE MOTOS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "48621884"
+		"_exporter_id": "26904134"
 	},
 	"item": [
 		{
@@ -1744,6 +1744,480 @@
 							"path": [
 								"products",
 								"6923bb778646f3a2c3bc3cb8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"item": [
+				{
+					"name": "Crear un pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"67b6cd7b2d1ec5ebd76a1234\",\n    \"productos\": [\n      {\n        \"producto\": \"67b6d15e2d1ec5ebd76a5555\",\n        \"cantidad\": 2,\n        \"precioUnitario\": 1200\n      },\n      {\n        \"producto\": \"67b6d1e12d1ec5ebd76a7777\",\n        \"cantidad\": 1,\n        \"precioUnitario\": 3500\n      }\n    ],\n    \"total\": 5900,\n    \"metodoPago\": \"67b6d59a2d1ec5ebd76a8888\",\n    \"direccion\": {\n      \"calle\": \"Av. Siempre Viva\",\n      \"numero\": \"742\",\n      \"ciudad\": \"Springfield\",\n      \"provincia\": \"Oregon\",\n      \"codigoPostal\": \"12345\",\n      \"pais\": \"USA\"\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrado por estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos?estado=pendiente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "pendiente"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrado por usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos?usuario=67b6cd7b2d1ec5ebd76a1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "67b6cd7b2d1ec5ebd76a1234"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un pedido por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos/67b6db3c2d1ec5ebd76a9123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"67b6db3c2d1ec5ebd76a9123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los pedidos de un usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos/usuario/67b6cd7b2d1ec5ebd76a1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"usuario",
+								"67b6cd7b2d1ec5ebd76a1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un pedido",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"total\": 6000,\n    \"estado\": \"pagado\",\n    \"direccion\": {\n      \"calle\": \"Nueva 123\",\n      \"numero\": \"10\",\n      \"ciudad\": \"Updated City\",\n      \"provincia\": \"Texas\",\n      \"codigoPostal\": \"45678\",\n      \"pais\": \"USA\"\n    }\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pedidos/6924f25e9397f410637f94bc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"6924f25e9397f410637f94bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar solo el estado del pedido",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"estado\": \"en camino\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/pedidos/6924f25e9397f410637f94bc/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"6924f25e9397f410637f94bc",
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/pedidos/6924f25e9397f410637f94bc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"pedidos",
+								"6924f25e9397f410637f94bc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Envios",
+			"item": [
+				{
+					"name": "Crear un envío",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pedido\": \"6924f25e9397f410637f94bc\",\n    \"direccion\": {\n      \"calle\": \"Av. Logística\",\n      \"numero\": \"55\",\n      \"ciudad\": \"Shipping City\",\n      \"provincia\": \"Miami\",\n      \"codigoPostal\": \"33101\",\n      \"pais\": \"USA\"\n    },\n    \"costo\": 1200,\n    \"estado\": \"preparando\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/envios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar envíos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por estado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios?estado=preparando",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "preparando"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios?pedido=6924f25e9397f410637f94bc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios"
+							],
+							"query": [
+								{
+									"key": "pedido",
+									"value": "6924f25e9397f410637f94bc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener envío por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios/6924f973b08df0ebd1f8b61e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios",
+								"6924f973b08df0ebd1f8b61e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener envíos por ID de pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios/pedido/6924f25e9397f410637f94bc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios",
+								"pedido",
+								"6924f25e9397f410637f94bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un envío",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"direccion\": {\n      \"calle\": \"Ruta Mejorada\",\n      \"numero\": \"77\",\n      \"ciudad\": \"New Shipping City\",\n      \"provincia\": \"Nevada\",\n      \"codigoPostal\": \"98765\",\n      \"pais\": \"USA\"\n    },\n    \"costo\": 1500,\n    \"estado\": \"en camino\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/envios/6924f973b08df0ebd1f8b61e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios",
+								"6924f973b08df0ebd1f8b61e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar solo el estado del envío",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"estado\": \"entregado\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/envios/6924f973b08df0ebd1f8b61e/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios",
+								"6924f973b08df0ebd1f8b61e",
+								"estado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un envío",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/envios/6924f973b08df0ebd1f8b61e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"envios",
+								"6924f973b08df0ebd1f8b61e"
 							]
 						}
 					},

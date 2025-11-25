@@ -1,4 +1,5 @@
 import Joi from "joi";
+import mongoose from "mongoose";
 // Validación de ObjectId de Mongo con mensaje personalizado
 const objectIdValidator = (value, helpers) => {
   if (!mongoose.Types.ObjectId.isValid(value)) {
