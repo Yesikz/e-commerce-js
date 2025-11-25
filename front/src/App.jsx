@@ -8,6 +8,7 @@ import MotoDetalle from "./pages/MotoDetalle.jsx";
 import Login from "./pages/Login.jsx";
 import Registro from "./pages/Registro.jsx";
 import Checkout from "./pages/Checkout.jsx";
+import Carrito from "./pages/Carrito.jsx";
 
 const App = () => {
   const usuario = useSelector(state => state.usuario.usuario);
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/producto/:id" element={<MotoDetalle />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/carrito" element={<Carrito />} />
         <Route path="/checkout" element={usuario ? <Checkout /> : <Navigate to="/login" />} />
       </Routes>
       <Footer />

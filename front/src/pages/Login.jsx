@@ -1,10 +1,14 @@
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/slices/usuarioSlice";
+import { useNavigate } from "react-router-dom";
 import "../style/styles.css";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -12,13 +16,19 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email.trim() === "" || password.trim() === "") {
+    if (!email.trim() || !password.trim()) {
       setMensaje("Por favor completa todos los campos.");
       return;
     }
 
+    
     dispatch(login({ email }));
+
     setMensaje("Login exitoso!");
+    setEmail("");
+    setPassword("");
+
+    navigate("/"); 
   };
 
   return (

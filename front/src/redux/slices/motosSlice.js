@@ -18,13 +18,19 @@ export const motosSlice = createSlice({
   initialState,
   reducers: {
     agregarCarrito: (state, action) => {
-      const existe = state.carrito.find(item => item.id === action.payload.id);
+      const { id, cantidad = 1 } = action.payload; 
+      const existe = state.carrito.find(item => item.id === id);
+
       if (existe) {
-        state.carrito = state.carrito.map(item =>
-          item.id === action.payload.id ? { ...item, cantidad: item.cantidad + 1 } : item
-        );
-      } else {
-        state.carrito.push({ ...action.payload, cantidad: 1 });
+        state.carrito = state.carrito
+          .map(item =>
+            item.id === id
+              ? { ...item, cantidad: Math.max(item.cantidad + cantidad, 0) }
+              : item
+          )
+          .filter(item => item.cantidad > 0); 
+      } else if (cantidad > 0) {
+        state.carrito.push({ ...action.payload, cantidad });
       }
     },
     eliminarCarrito: (state, action) => {
