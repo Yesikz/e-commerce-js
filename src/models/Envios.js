@@ -15,13 +15,18 @@ const envioSchema = new Schema(
       codigoPostal: String,
       pais: String,
     },
+    costo: {
+      type: Number,
+      required: true,
+      min: 0
+    },
     estado: {
       type: String,
-      enum: ["pendiente", "en camino", "entregado"],
-      default: "pendiente",
+      enum: ["preparando", "en camino", "entregado"],
+      default: "preparando",
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 export default model("Envio", envioSchema);
