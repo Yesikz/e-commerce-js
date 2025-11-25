@@ -5,6 +5,7 @@ import {
   getProductsByNameControllers,
   updateProductControllers,
   deleteProductControllers,
+  getProductsByCategoryController,
 } from "../controllers/productsControllers.js";
 import { validate } from "../validations/validators.js";
 
@@ -97,6 +98,16 @@ export const deleteProductHandler = async (req, res, next) => {
       message: response.message,
       data: response,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getProductsByCategoryHandler = async (req, res, next) => {
+  try {
+    const { categoriaId } = req.params;
+    const response = await getProductsByCategoryController(categoriaId);
+    return res.status(200).json(response);
   } catch (err) {
     next(err);
   }

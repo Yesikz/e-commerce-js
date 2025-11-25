@@ -48,23 +48,38 @@ src/
 │   └── logger.js               # Configuración y manejo de logs personalizados
 │
 ├── controllers/                # Controladores: manejan la lógica de negocio
+│   ├── authControllers.js
+│   ├── carritoControllers.js
 │   ├── categoryController.js
+│   ├── enviosControllers.js
+│   ├── marcasControllers.js
+│   ├── metodoPagoControllers.js
+│   ├── pedidosControllers.js
 │   ├── productsController.js
-│   ├── usuarioController.js
+│   └── usuarioController.js
 │
 ├── db/                         # Conexión y configuración de la base de datos
 │   └── database.js
 │
 ├── handlers/                   # Handlers: reciben las solicitudes HTTP y llaman a los controladores
+│   ├── authHandler.js
+│   ├── carritoHandler.js
 │   ├── categoryHandler.js
+│   ├── enviosHandler.js
+│   ├── marcasHandler.js
+│   ├── metodoPagoHandler.js
+│   ├── pedidosHandler.js
 │   ├── productsHandler.js
-│   ├── usuarioHandler.js
+│   └── usuarioHandler.js
 │
 ├── logs/                       # Registro de logs de acceso y errores con morgan
 │   └── access.log
 │
 ├── middleware/                 # Middlewares de Express para validación, autorización y manejo de errores
+│   ├── autenticarMiddleware.js
+│   ├── autorizarMiddleware.js
 │   ├── errorHandler.js
+│   └── generarTokenMiddleware.js
 │
 ├── models/                     # Modelos de base de datos
 │   ├── Carrito.js
@@ -83,12 +98,19 @@ src/
 │
 │
 ├── Routes/                     # Definición y organización de rutas del servidor
+│   ├── authRoutes.js
+│   ├── cartRoutes.js
 │   ├── categoryRoutes.js
-│   ├── mainRoute.js
+│   ├── enviosRoutes.js
+│   ├── mainRoutes.js
+│   ├── marcasRoute.js
+│   ├── metodoPagoRoute.js
+│   ├── pedidosRoute.js
 │   ├── productsRoute.js
 │   ├── userRoutes.js
 │
 ├── validations/                # Validaciones de datos mediante Joi
+│   ├── authValidation.js
 │   ├── carritoValidation.js
 │   ├── categoriaValidation.js
 │   ├── enviosValidation.js
@@ -99,11 +121,12 @@ src/
 │   ├── usuariosValidation.js
 │   └── validators.js           # Función centralizada para validar datos de entrada según el modelo correspondiente.
 │
+├── .ENV
 ├── app.js                      # Configuración principal de la aplicación Express
 ├── .gitignore
-├── server.js                   # Punto de entrada del servidor
 ├── package.json                # Configuración del proyecto y dependencias
 └── README.md
+├── server.js                   # Punto de entrada del servidor
 ```
 
 ### 📄 Archivos raíz

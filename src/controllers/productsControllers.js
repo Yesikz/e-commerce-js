@@ -76,7 +76,7 @@ export const getProductsByIdControllers = async (id) => {
 
 /* trae los productos por nombre */
 export const getProductsByNameControllers = async (nombre) => {
-  const producto = await products.findOne( {nombre} );
+  const producto = await products.findOne({ nombre });
 
   if (!producto) {
     throw new Error("No se encontró el producto");
@@ -138,4 +138,29 @@ export const deleteProductControllers = async (id) => {
     message: `Producto con ID '${id}' eliminado exitosamente`,
     data: Producto,
   };
+};
+
+export const getProductsByCategoryController = async (categoriaId) => {
+  try {
+    // Buscar productos que tengan la categoría indicada
+    const productos = await products.find({ categoria: categoriaId });
+
+    if (!productos || productos.length === 0) {
+      return {
+        success: true,
+        message: "No se encontraron productos en esta categoría",
+        data: [],
+      };
+    }
+
+    return {
+      success: true,
+      message: "Productos encontrados",
+      data: productos,
+    };
+  } catch (error) {
+    throw new Error(
+      `Error al obtener productos por categoría: ${error.message}`
+    );
+  }
 };
