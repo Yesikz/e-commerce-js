@@ -194,13 +194,9 @@ export const clearCartHandler = async (req, res, next) => {
 export const checkoutCartHandler = async (req, res, next) => {
   try {
     const { cartId } = req.params;
-    const { metodoPago, direccion } = req.body;
+    const { metodoPago } = req.body;
 
-    const response = await checkoutCartController(
-      cartId,
-      metodoPago,
-      direccion
-    );
+    const response = await checkoutCartController(cartId, metodoPago);
 
     return res.status(201).json({
       success: true,
