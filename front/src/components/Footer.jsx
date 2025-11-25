@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <p className="footer-copy">E-COMMERCE-JS © 2025. Todos los derechos reservados.</p>
+        <p className="footer-copy">NITRORIDERS © 2025. Todos los derechos reservados.</p>
 
         <div className="footer-links">
           <span>Términos y Condiciones</span>
