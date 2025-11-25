@@ -329,8 +329,8 @@ export const clearCartController = async (cartId) => {
 };
 
 // Finalizar el carrito y crear un pedido asociado
-export const checkoutCartController = async (cartId, metodoPago, direccion) => {
-  //  Buscar carrito
+export const checkoutCartController = async (cartId, metodoPago) => {
+  // Buscar carrito
   const carrito = await Carrito.findById(cartId).populate("productos.producto");
 
   if (!carrito) {
@@ -345,7 +345,25 @@ export const checkoutCartController = async (cartId, metodoPago, direccion) => {
     throw error;
   }
 
-  //  Crear estructura de productos para el pedido
+  // Buscar usuario del carrito
+  const usuario = await Usuario.findById(carrito.usuario);
+
+  if (!usuario) {
+    const error = new Error("Usuario asociado al carrito no existe");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  // Obtener dirección del usuario
+  const direccion = usuario.direccion?.[0];
+
+  if (!direccion) {
+    const error = new Error("El usuario no tiene dirección registrada");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // Crear estructura de productos para el pedido
   const productosPedido = carrito.productos.map((item) => ({
     producto: item.producto._id,
     cantidad: item.cantidad,
@@ -364,13 +382,12 @@ export const checkoutCartController = async (cartId, metodoPago, direccion) => {
     productos: productosPedido,
     total,
     metodoPago,
-    direccion,
+    direccion, // <<--- viene del usuario automáticamente
     estado: "pendiente",
   });
 
   // Cambiar estado del carrito
   carrito.estado = "finalizado";
-
   carrito.productos = [];
   await carrito.save();
 
